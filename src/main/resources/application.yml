@@ -1,0 +1,23 @@
+#server:
+#  port: 8080
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/dprms_db
+#    username: root
+#    password: admin
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: mrsouth16@gmail.com
+#    password: clhoailkqwoyypub
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
