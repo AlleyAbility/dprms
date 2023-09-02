@@ -10,5 +10,6 @@ public record RegistrationRequest(
          String phone,
          String institutionName,
          String division,
-         String role) {
+         String role,
+         String project) {
 }

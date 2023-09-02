@@ -1,15 +1,14 @@
 package com.example.dprms.user.services;
 
-import com.example.dprms.Project.Project;
 import com.example.dprms.Project.repository.ProjectRepository;
 import com.example.dprms.exception.UserAlreadyExistsException;
 import com.example.dprms.exception.UserNotFoundException;
 import com.example.dprms.registration.RegistrationRequest;
+import com.example.dprms.registration.token.VerificationToken;
 import com.example.dprms.registration.token.VerificationTokenRepository;
 import com.example.dprms.role.Role;
 import com.example.dprms.role.repository.RoleRepository;
 import com.example.dprms.user.User;
-import com.example.dprms.registration.token.VerificationToken;
 import com.example.dprms.user.UserRecord;
 import com.example.dprms.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -39,10 +38,10 @@ public class UserService implements IUserService {
                         user.getLastName(),
                         user.getEmail(),
                         user.getPosition(),
-                        user.getDivision(),
-                        user.getInstitutionName(),
-                        user.getPhone(),
                         user.getEmployeeId(),
+                        user.getPhone(),
+                        user.getInstitutionName(),
+                        user.getDivision(),
                         new HashSet<>(user.getRoles()),
                         new HashSet<>(user.getProjects()))).collect(Collectors.toList());
     }
@@ -57,7 +56,6 @@ public class UserService implements IUserService {
        }
 
        Role role = roleRepository.findByName("ROLE_USER").get();
-       Project project = projectRepository.findByProjectName("").get();
        var newUser = new User();
        newUser.setFirstName(request.firstName());
        newUser.setLastName(request.lastName());
@@ -69,7 +67,6 @@ public class UserService implements IUserService {
        newUser.setInstitutionName(request.institutionName());
        newUser.setPosition(request.position());
        newUser.setRoles(Collections.singletonList(role));
-       newUser.setProjects(Collections.singletonList(project));
         return userRepository.save(newUser);
     }
 

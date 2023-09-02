@@ -20,7 +20,7 @@ public class UserDTO {
     private String division;
     private Collection<Role> roles;
     private Collection<Project> projects;
-    private boolean enabled;
-    private boolean notLocked;
+//    private boolean enabled;
+//    private boolean notLocked;
 
 }

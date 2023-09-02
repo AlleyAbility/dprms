@@ -57,7 +57,7 @@ public class RoleService implements IRoleService {
         roleRepository.save(role.get());
         return user.get();
     }
-        throw new UserNotFoundException("User not found!");
+        throw new UserNotFoundException("User not found in the specified role!!");
     }
 
     @Override
@@ -77,6 +77,7 @@ public class RoleService implements IRoleService {
     public Role removeAllUserFromRole(Long roleId) {
         Optional<Role> role = roleRepository.findById(roleId);
         role.ifPresent(Role::removeAllUsersFromRole);
-        return roleRepository.save(role.get());
+        roleRepository.save(role.get());
+        return role.get();
     }
 }

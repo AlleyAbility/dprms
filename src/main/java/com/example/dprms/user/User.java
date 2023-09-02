@@ -30,6 +30,7 @@ public class User {
     private String employeeId;
     private String institutionName;
     private String division;
+    @Column(length = 64)
     private String password;
     private boolean isEnabled = false;
     private boolean notLocked = true;

@@ -1,4 +1,5 @@
 package com.example.dprms.security;
+
 import com.example.dprms.jwt.JWTAuthenticationFilter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,12 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.sql.DataSource;
 
 
 @Configuration
@@ -23,28 +25,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class UserRegistrationSecurityConfig {
 
     @Autowired
+    private DataSource dataSource;
+
+    @Autowired
     private JWTAuthenticationFilter authenticationFilter;
 
     @Autowired
     private UserRegistrationDetailsService userDetailsService;
 
-    private static final String[] SECURED_URLs = {"/dprms/**"};
+    private static final String[] SECURED_URLs = {
+            "/dprms/**"};
 
     private static final String[] UN_SECURED_URLs = {
             "/projects/**",
             "/projects/{id}",
             "/users/**",
-            "/login/**",
             "/login",
-            "/register",
             "/register/**",
             "/roles/**"
     };
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
@@ -57,26 +56,43 @@ public class UserRegistrationSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers(UN_SECURED_URLs).permitAll().and()
-                .authorizeHttpRequests().requestMatchers(SECURED_URLs)
-                .hasAnyAuthority( "ADMIN", "MANAGER").anyRequest().authenticated()
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin().and().build();
-    }
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+            http.csrf().disable()
+                    .authorizeHttpRequests()
+                    .requestMatchers(UN_SECURED_URLs).permitAll()
+                    .requestMatchers(SECURED_URLs).hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                    .and()
+//                    .authorizeHttpRequests(authorizeRequests ->
+//                            authorizeRequests
+//                                    .dispatcherTypeMatchers(HttpMethod.POST, DispatcherType.valueOf("/")).hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER")
+//                                    .dispatcherTypeMatchers(HttpMethod.POST, DispatcherType.valueOf("/register")).hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER","ROLE_USER")
+//                                    .dispatcherTypeMatchers(HttpMethod.GET).hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER")
+//                                    .dispatcherTypeMatchers(HttpMethod.PUT).hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER")
+//                                    .dispatcherTypeMatchers(HttpMethod.DELETE).hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER")
+//                    )
+                    .authorizeHttpRequests().anyRequest().authenticated()
+                    .and()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authenticationProvider(authenticationProvider())
+                    .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-}
+            return http.build();
+        }
+
+        @Bean
+        public PasswordEncoder passwordEncoder(){
+            return new BCryptPasswordEncoder();
+        }
+
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+            return authConfig.getAuthenticationManager();
+        }
+
+        @Bean
+        public ModelMapper modelMapper() {
+            return new ModelMapper();
+        }
+    }

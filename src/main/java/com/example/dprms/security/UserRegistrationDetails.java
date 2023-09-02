@@ -1,10 +1,13 @@
 package com.example.dprms.security;
 
 import com.example.dprms.user.User;
+import com.example.dprms.user.repository.UserRepository;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,6 +17,9 @@ import java.util.stream.Collectors;
 
 @Data
 public class UserRegistrationDetails implements UserDetails {
+
+    @Autowired
+    private UserRepository userRepository;
 
     private String userName;
     private String password;
@@ -66,4 +72,5 @@ public class UserRegistrationDetails implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
 }
