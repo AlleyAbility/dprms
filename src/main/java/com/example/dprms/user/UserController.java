@@ -22,7 +22,7 @@ public class UserController {
     private ModelMapper modelMapper;
 
     @GetMapping("/all")
-    public ResponseEntity<List<UserRecord>> getAllUsers(){
+    public ResponseEntity<List<UserRecord>> getUsers(){
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
     }
 //    public List<User> getUsers(){

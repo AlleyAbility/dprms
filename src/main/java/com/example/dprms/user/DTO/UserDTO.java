@@ -1,5 +1,6 @@
 package com.example.dprms.user.DTO;
 
+import com.example.dprms.Project.Project;
 import com.example.dprms.role.Role;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class UserDTO {
     private String institutionName;
     private String division;
     private Collection<Role> roles;
+    private Collection<Project> projects;
     private boolean enabled;
     private boolean notLocked;
 

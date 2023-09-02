@@ -1,5 +1,6 @@
 package com.example.dprms.role;
 
+import com.example.dprms.role.services.IRoleService;
 import com.example.dprms.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,10 @@
-package com.example.dprms.role;
+package com.example.dprms.role.services;
 
 import com.example.dprms.exception.RoleAlreadyExistException;
 import com.example.dprms.exception.UserAlreadyExistsException;
 import com.example.dprms.exception.UserNotFoundException;
-import com.example.dprms.user.DTO.UserDTO;
+import com.example.dprms.role.Role;
+import com.example.dprms.role.repository.RoleRepository;
 import com.example.dprms.user.User;
 import com.example.dprms.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class RoleService implements IRoleService{
+public class RoleService implements IRoleService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 

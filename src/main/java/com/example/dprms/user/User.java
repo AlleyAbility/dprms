@@ -1,5 +1,6 @@
 package com.example.dprms.user;
 
+import com.example.dprms.Project.Project;
 import com.example.dprms.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,11 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
-import java.util.Calendar;
-import java.util.Date;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 @Getter
 @Setter
@@ -43,5 +41,17 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles = new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST,
+                    CascadeType.MERGE, CascadeType.DETACH})
+    @JoinTable(
+            name = "user_projects",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+    private Collection<Project> projects = new HashSet<>();
+
+
 
 }

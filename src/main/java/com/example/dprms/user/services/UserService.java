@@ -1,12 +1,13 @@
 package com.example.dprms.user.services;
 
+import com.example.dprms.Project.Project;
+import com.example.dprms.Project.repository.ProjectRepository;
 import com.example.dprms.exception.UserAlreadyExistsException;
 import com.example.dprms.exception.UserNotFoundException;
 import com.example.dprms.registration.RegistrationRequest;
 import com.example.dprms.registration.token.VerificationTokenRepository;
-import com.example.dprms.role.IRoleService;
 import com.example.dprms.role.Role;
-import com.example.dprms.role.RoleRepository;
+import com.example.dprms.role.repository.RoleRepository;
 import com.example.dprms.user.User;
 import com.example.dprms.registration.token.VerificationToken;
 import com.example.dprms.user.UserRecord;
@@ -26,6 +27,7 @@ public class UserService implements IUserService {
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository tokenRepository;
     private final RoleRepository roleRepository;
+    private final ProjectRepository projectRepository;
 
     @Override
     public List<UserRecord> getUsers() {
@@ -41,11 +43,10 @@ public class UserService implements IUserService {
                         user.getInstitutionName(),
                         user.getPhone(),
                         user.getEmployeeId(),
-                        new HashSet<>(user.getRoles()))).collect(Collectors.toList());
+                        new HashSet<>(user.getRoles()),
+                        new HashSet<>(user.getProjects()))).collect(Collectors.toList());
     }
-//    public List<User> getUsers() {
-//        return userRepository.findAll();
-//    }
+
 
     @Override
     public User registerUser(RegistrationRequest request) {
@@ -55,7 +56,8 @@ public class UserService implements IUserService {
                    "User with email "+request.email() + " already exists");
        }
 
-        Role role = roleRepository.findByName("ROLE_USER").get();
+       Role role = roleRepository.findByName("ROLE_USER").get();
+       Project project = projectRepository.findByProjectName("").get();
        var newUser = new User();
        newUser.setFirstName(request.firstName());
        newUser.setLastName(request.lastName());
@@ -67,6 +69,7 @@ public class UserService implements IUserService {
        newUser.setInstitutionName(request.institutionName());
        newUser.setPosition(request.position());
        newUser.setRoles(Collections.singletonList(role));
+       newUser.setProjects(Collections.singletonList(project));
         return userRepository.save(newUser);
     }
 
@@ -113,6 +116,8 @@ public class UserService implements IUserService {
     @Override
     public User update(User user) {
         user.setRoles(user.getRoles());
+        user.setProjects(user.getProjects());
         return userRepository.save(user);
     }
+
 }

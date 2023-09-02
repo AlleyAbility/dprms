@@ -1,6 +1,7 @@
 package com.example.dprms.user;
 
 
+import com.example.dprms.Project.Project;
 import com.example.dprms.role.Role;
 
 import java.util.HashSet;
@@ -16,4 +17,5 @@ public record UserRecord(
         String phone,
         String institutionName,
         String division,
-        Set<Role> roles) {}
+        Set<Role> roles,
+        Set<Project> projects) {}

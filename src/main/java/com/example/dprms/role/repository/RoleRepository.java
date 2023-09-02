@@ -1,5 +1,6 @@
-package com.example.dprms.role;
+package com.example.dprms.role.repository;
 
+import com.example.dprms.role.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

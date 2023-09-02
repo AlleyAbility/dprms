@@ -1,5 +1,6 @@
-package com.example.dprms.role;
+package com.example.dprms.role.services;
 
+import com.example.dprms.role.Role;
 import com.example.dprms.user.User;
 
 import java.util.List;

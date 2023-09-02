@@ -62,9 +62,6 @@ public class UserRegistrationSecurityConfig {
                 .requestMatchers(UN_SECURED_URLs).permitAll().and()
                 .authorizeHttpRequests().requestMatchers(SECURED_URLs)
                 .hasAnyAuthority( "ADMIN", "MANAGER").anyRequest().authenticated()
-//                .and().formLogin() // Use form-based authentication
-//                .defaultSuccessUrl("/users/all") // Redirect after successful login
-//                .permitAll() // Allow access to login page without authentication
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -81,20 +78,5 @@ public class UserRegistrationSecurityConfig {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.cors()
-//                .and().csrf().disable()
-//                .authorizeHttpRequests()
-//                .requestMatchers("/register/**","/login")
-//                .permitAll()
-//                .and()
-//                .authorizeHttpRequests()
-//                .requestMatchers("/dprms/**")
-//                .hasAnyAuthority("USER", "ADMIN", "MANAGER")
-//                .and().formLogin().defaultSuccessUrl("/dprms/")
-//                .and()
-//                .build();
-//    }
 
 }
