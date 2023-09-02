@@ -25,20 +25,6 @@ public class UserController {
     public ResponseEntity<List<UserRecord>> getUsers(){
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
     }
-//    public List<User> getUsers(){
-//
-//        return userService.getUsers();
-//    }
-//    public ResponseEntity<?> getAllUsers(){
-//        List<User> list = userService.getUsers();
-//        List<UserDTO> allUser = new ArrayList<>();
-//        for(User user:list){
-//            UserDTO userDTO = new UserDTO();
-//            userDTO = modelMapper.map(user, UserDTO.class);
-//            allUser.add(userDTO);
-//        }
-//        return ResponseEntity.ok(allUser);
-//    }
 
     @GetMapping("/{email}")
     public User getByEmail(@PathVariable("email") String email){

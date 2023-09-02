@@ -18,4 +18,5 @@ public interface IProjectService {
     User removeUserFromProject(Long userId, Long projectId);
     User assignUserToProject(Long userId, Long projectId);
     Project removeAllUserFromProject(Long projectId);
+
 }

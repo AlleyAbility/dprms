@@ -63,7 +63,7 @@ public class UserService implements IUserService {
        newUser.setPassword(passwordEncoder.encode(request.password()));
        newUser.setDivision(request.division());
        newUser.setEmployeeId(request.employeeId());
-       newUser.setPhone(request.employeeId());
+       newUser.setPhone(request.phone());
        newUser.setInstitutionName(request.institutionName());
        newUser.setPosition(request.position());
        newUser.setRoles(Collections.singletonList(role));

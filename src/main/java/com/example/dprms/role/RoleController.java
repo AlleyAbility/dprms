@@ -1,5 +1,6 @@
 package com.example.dprms.role;
 
+import com.example.dprms.Project.Project;
 import com.example.dprms.role.services.IRoleService;
 import com.example.dprms.user.User;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class RoleController {
     @DeleteMapping("/delete/{id}")
     public void createRole(@PathVariable("id") Long roleId){
         roleService.deleteRole(roleId);
+    }
+
+    @GetMapping("/{id}")
+    public Role getById(@PathVariable("id") Long roleId){
+        return  roleService.findById(roleId);
     }
     @PostMapping("/remove-all-users-from-role/{id}")
     public Role removeAllUsersFromRole(@PathVariable("id") Long roleId){

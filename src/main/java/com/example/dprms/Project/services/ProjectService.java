@@ -37,6 +37,8 @@ public class ProjectService implements IProjectService {
             throw new ProjectAlreadyExistsException("Project with the same name already exists in the institution.");
         }
 
+        //assigning the user to project
+
         return projectRepository.save(theProject);
     }
 
@@ -61,10 +63,6 @@ public class ProjectService implements IProjectService {
     public Project findByProjectName(String projectName) {
         return projectRepository.findByProjectName(projectName).get();
     }
-//    @Override
-//    public Project findByInstitution(String institutionName) {
-//        return projectRepository.findByInstitution(institutionName).get();
-//    }
 
     @Override
     public Optional<Project> findByProjectNameAndInstitutionName(String projectName, String institutionName) {

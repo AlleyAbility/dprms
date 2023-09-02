@@ -33,6 +33,12 @@ public class ProjectController {
     public ResponseEntity<Project> createProject(@RequestBody Project project){
         return new ResponseEntity<>(projectService.createProject(project), CREATED);
     }
+
+    @GetMapping("/{id}")
+    public Project getById(@PathVariable("id") Long projectId){
+        return  projectService.findById(projectId);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void createProject(@PathVariable("id") Long projectId){
         projectService.deleteProject(projectId);
