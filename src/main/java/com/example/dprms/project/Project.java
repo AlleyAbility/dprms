@@ -1,4 +1,4 @@
-package com.example.dprms.Project;
+package com.example.dprms.project;
 
 import com.example.dprms.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter

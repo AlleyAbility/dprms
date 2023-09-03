@@ -42,7 +42,8 @@ public class UserRegistrationSecurityConfig {
             "/users/**",
             "/login",
             "/register/**",
-            "/roles/**"
+            "/roles/**",
+            "/documents/**"
     };
 
     @Bean

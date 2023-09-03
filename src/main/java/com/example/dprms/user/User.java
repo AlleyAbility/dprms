@@ -1,6 +1,6 @@
 package com.example.dprms.user;
 
-import com.example.dprms.Project.Project;
+import com.example.dprms.project.Project;
 import com.example.dprms.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

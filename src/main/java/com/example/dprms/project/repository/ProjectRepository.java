@@ -1,12 +1,12 @@
-package com.example.dprms.Project.repository;
+package com.example.dprms.project.repository;
 
-import com.example.dprms.Project.Project;
+import com.example.dprms.project.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     Optional<Project> findByProjectName(String projectName);
-//    Optional<Project> findByInstitution(String institutionName);
+//    Optional<project> findByInstitution(String institutionName);
     Optional<Project> findByProjectNameAndInstitutionName(String projectName, String institutionName);
 }

@@ -1,6 +1,6 @@
-package com.example.dprms.Project;
+package com.example.dprms.project;
 
-import com.example.dprms.Project.services.IProjectService;
+import com.example.dprms.project.services.IProjectService;
 import com.example.dprms.user.User;
 import com.example.dprms.user.services.UserService;
 import lombok.RequiredArgsConstructor;

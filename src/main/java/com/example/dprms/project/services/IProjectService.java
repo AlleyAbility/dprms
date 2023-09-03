@@ -1,6 +1,6 @@
-package com.example.dprms.Project.services;
+package com.example.dprms.project.services;
 
-import com.example.dprms.Project.Project;
+import com.example.dprms.project.Project;
 import com.example.dprms.user.User;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface IProjectService {
     Project createProject(Project theProject);
     void deleteProject(Long projectId);
     Project findByProjectName(String projectName);
-//    Project findByInstitution(String institutionName);
+//    project findByInstitution(String institutionName);
     Optional<Project> findByProjectNameAndInstitutionName(String projectName, String institutionName);
     Project findById(Long projectId);
     User removeUserFromProject(Long userId, Long projectId);

@@ -1,6 +1,5 @@
 package com.example.dprms.role;
 
-import com.example.dprms.Project.Project;
 import com.example.dprms.role.services.IRoleService;
 import com.example.dprms.user.User;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class RoleController {
         return new ResponseEntity<>(roleService.createRole(role), CREATED);
     }
     @DeleteMapping("/delete/{id}")
-    public void createRole(@PathVariable("id") Long roleId){
+    public void deleteRole(@PathVariable("id") Long roleId){
         roleService.deleteRole(roleId);
     }
 

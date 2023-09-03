@@ -1,15 +1,13 @@
 package com.example.dprms.user;
 
-import com.example.dprms.user.DTO.UserDTO;
 import com.example.dprms.user.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,6 +37,22 @@ public class UserController {
     @PutMapping("/update")
     public ResponseEntity<User> update(@RequestBody User user){
         return ResponseEntity.ok(userService.update(user));
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<User> updateUser(
+            @PathVariable("id") Long id,
+            @RequestBody User updatedUser) {
+        User updated = userService.updateUser(id, updatedUser);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PostMapping("/updatePassword/{id}")
+    public ResponseEntity<User> updatePassword(
+            @PathVariable("id") Long id,
+            @RequestBody User updatedPassword) {
+        User updated = userService.updatePassword(id, updatedPassword);
+        return ResponseEntity.ok(updated);
     }
 
 }

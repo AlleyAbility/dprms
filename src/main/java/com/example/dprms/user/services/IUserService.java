@@ -1,5 +1,6 @@
 package com.example.dprms.user.services;
 
+import com.example.dprms.document.DocumentRecord;
 import com.example.dprms.registration.RegistrationRequest;
 import com.example.dprms.user.User;
 import com.example.dprms.user.UserRecord;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public interface IUserService {
     List<UserRecord> getUsers();
+
     User registerUser(RegistrationRequest request);
     Optional<User> findByEmail(String email);
 
@@ -20,5 +22,7 @@ public interface IUserService {
     void delete(String email);
     User getUser(String email);
     User update(User user);
+    User updateUser(Long id, User updatedUser);
 
+    User updatePassword(Long id, User updatedPassword);
 }

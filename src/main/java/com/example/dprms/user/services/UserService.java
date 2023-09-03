@@ -1,6 +1,6 @@
 package com.example.dprms.user.services;
 
-import com.example.dprms.Project.repository.ProjectRepository;
+import com.example.dprms.project.repository.ProjectRepository;
 import com.example.dprms.exception.UserAlreadyExistsException;
 import com.example.dprms.exception.UserNotFoundException;
 import com.example.dprms.registration.RegistrationRequest;
@@ -115,6 +115,67 @@ public class UserService implements IUserService {
         user.setRoles(user.getRoles());
         user.setProjects(user.getProjects());
         return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUser(Long id, User updatedUser) {
+        Optional<User> existingUser = userRepository.findById(id);
+
+        if (existingUser.isPresent()) {
+            User userToUpdate = existingUser.get();
+
+            // Update the fields
+            if (updatedUser.getFirstName() != null) {
+                userToUpdate.setFirstName(updatedUser.getFirstName());
+            }
+            if (updatedUser.getLastName() != null) {
+                userToUpdate.setLastName(updatedUser.getLastName());
+            }
+            if (updatedUser.getEmail() != null) {
+                userToUpdate.setEmail(updatedUser.getEmail());
+            }
+            if (updatedUser.getPhone() != null) {
+                userToUpdate.setPhone(updatedUser.getPhone());
+            }
+            if (updatedUser.getDivision() != null) {
+                userToUpdate.setDivision(updatedUser.getDivision());
+            }
+            if (updatedUser.getEmployeeId() != null) {
+                userToUpdate.setEmployeeId(userToUpdate.getEmployeeId());
+            }
+            if (updatedUser.getInstitutionName() != null) {
+                userToUpdate.setInstitutionName(userToUpdate.getInstitutionName());
+            }
+            if (updatedUser.getPosition() != null) {
+                userToUpdate.setPosition(userToUpdate.getPosition());
+            }
+
+
+            // Save the updated user
+            return userRepository.save(userToUpdate);
+        } else {
+            // Handle the case where the user with the given ID is not found
+            throw new UserNotFoundException("User not found with ID: " + id);
+        }
+    }
+
+    @Override
+    public User updatePassword(Long id, User updatedPassword) {
+        Optional<User> existingUser = userRepository.findById(id);
+
+        if (existingUser.isPresent()) {
+            User userToUpdate = existingUser.get();
+
+            // Update the fields
+            if (updatedPassword.getPassword() != null) {
+                userToUpdate.setPassword(passwordEncoder.encode(updatedPassword.getPassword()));
+            }
+            // Save the updated password
+            return userRepository.save(userToUpdate);
+        } else {
+            // Handle the case where the user with the given ID is not found
+            throw new UserNotFoundException("Password not correct");
+        }
     }
 
 }

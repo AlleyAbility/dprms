@@ -1,7 +1,7 @@
-package com.example.dprms.Project.services;
+package com.example.dprms.project.services;
 
-import com.example.dprms.Project.Project;
-import com.example.dprms.Project.repository.ProjectRepository;
+import com.example.dprms.project.Project;
+import com.example.dprms.project.repository.ProjectRepository;
 import com.example.dprms.exception.ProjectAlreadyExistsException;
 import com.example.dprms.exception.UserAlreadyExistsException;
 import com.example.dprms.exception.UserNotFoundException;
@@ -24,8 +24,6 @@ public class ProjectService implements IProjectService {
         return projectRepository.findAll();
     }
 
-
-
     @Override
     public Project createProject(Project theProject) {
         // Check if a project with the same name exists in the same institution
@@ -34,7 +32,7 @@ public class ProjectService implements IProjectService {
         );
 
         if (existingProject.isPresent()) {
-            throw new ProjectAlreadyExistsException("Project with the same name already exists in the institution.");
+            throw new ProjectAlreadyExistsException("project with the same name already exists in the institution.");
         }
 
         //assigning the user to project
@@ -44,11 +42,11 @@ public class ProjectService implements IProjectService {
 
 //
 //    @Override
-//    public Project createProject(Project theProject) {
-//        Optional<Project> checkProject = projectRepository.findByName(theProject.getProjectName());
-//        Optional<Project> checkInstitution = projectRepository.findByInstitution(theProject.getInstitutionName());
+//    public project createProject(project theProject) {
+//        Optional<project> checkProject = projectRepository.findByName(theProject.getProjectName());
+//        Optional<project> checkInstitution = projectRepository.findByInstitution(theProject.getInstitutionName());
 //        if (checkProject.isPresent() && checkInstitution.isPresent()){
-//            throw new RoleAlreadyExistException(checkProject.get().getProjectManager()+ " Project already exist");
+//            throw new RoleAlreadyExistException(checkProject.get().getProjectManager()+ " project already exist");
 //        }
 //        return projectRepository.save(theProject);
 //    }
