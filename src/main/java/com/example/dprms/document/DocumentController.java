@@ -137,7 +137,7 @@ public class DocumentController {
                         }
 
                         // Check if a document with the same project ID and filename already exists
-                        Optional<Document> existingDocument = documentRepository.findByProjectIdAndDocumentName(projectId, file.getOriginalFilename() + " Concept Note");
+                        Optional<Document> existingDocument = documentRepository.findByProjectIdAndDocumentName(projectId, file.getOriginalFilename() + " TOR");
 
                         if (existingDocument.isPresent()) {
                                 return ResponseEntity.badRequest().body("A document with the same project ID and filename already exists.");
@@ -167,7 +167,7 @@ public class DocumentController {
                         document.setDocumentName(file.getOriginalFilename() + " Concept Note");
                         document.setProject(projectOptional.get()); // Set the Project entity
 
-                        String fileName = file.getOriginalFilename() + " Concept Note";
+                        String fileName = file.getOriginalFilename() + " TOR";
                         // transfer file
                         try {
                                 file.transferTo(new File("C:\\Users\\HP\\Desktop\\EGA-PROJECT\\development\\backend\\dprmsEGAZ\\src\\main\\java\\com\\example\\dprms\\upload\\" + fileName));
