@@ -2,7 +2,6 @@ package com.example.dprms.project;
 
 import com.example.dprms.project.services.IProjectService;
 import com.example.dprms.user.User;
-import com.example.dprms.user.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ import static org.springframework.http.HttpStatus.FOUND;
 @RequiredArgsConstructor
 @RequestMapping("/projects")
 public class ProjectController {
-    private final UserService userService;
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -40,7 +37,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void createProject(@PathVariable("id") Long projectId){
+    public void deleteProject(@PathVariable("id") Long projectId){
         projectService.deleteProject(projectId);
     }
     @PostMapping("/remove-all-users-from-project/{id}")

@@ -1,4 +1,4 @@
-package com.example.dprms.jwt;
+package com.example.dprms.security.jwt;
 
 
 import com.example.dprms.user.User;

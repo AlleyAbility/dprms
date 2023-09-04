@@ -1,7 +1,7 @@
-package com.example.dprms.jwt;
+package com.example.dprms.security.jwt;
 
 
-import com.example.dprms.security.UserRegistrationDetailsService;
+import com.example.dprms.security.userDetails.UserRegistrationDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

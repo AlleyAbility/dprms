@@ -13,7 +13,7 @@
 #  mail:
 #    host: smtp.gmail.com
 #    port: 587
-#    username: mrsouth16@gmail.com
+#    username:
 #    password: 
 #    properties:
 #      mail:

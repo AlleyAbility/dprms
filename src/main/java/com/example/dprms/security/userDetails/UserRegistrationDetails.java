@@ -1,4 +1,4 @@
-package com.example.dprms.security;
+package com.example.dprms.security.userDetails;
 
 import com.example.dprms.user.User;
 import com.example.dprms.user.repository.UserRepository;

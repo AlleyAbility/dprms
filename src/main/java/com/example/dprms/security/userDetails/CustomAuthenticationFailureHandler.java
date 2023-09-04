@@ -1,4 +1,4 @@
-package com.example.dprms.security;
+package com.example.dprms.security.userDetails;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.io.IOException;

@@ -1,6 +1,6 @@
-package com.example.dprms.security;
+package com.example.dprms.security.userDetails;
 
-import com.example.dprms.jwt.JWTAuthenticationFilter;
+import com.example.dprms.security.jwt.JWTAuthenticationFilter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +43,8 @@ public class UserRegistrationSecurityConfig {
             "/login",
             "/register/**",
             "/roles/**",
-            "/documents/**"
+            "/documents/**",
+            "/notifications/**"
     };
 
     @Bean

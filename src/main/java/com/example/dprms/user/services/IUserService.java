@@ -1,6 +1,5 @@
 package com.example.dprms.user.services;
 
-import com.example.dprms.document.DocumentRecord;
 import com.example.dprms.registration.RegistrationRequest;
 import com.example.dprms.user.User;
 import com.example.dprms.user.UserRecord;

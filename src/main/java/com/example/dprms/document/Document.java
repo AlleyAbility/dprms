@@ -18,6 +18,7 @@ public class Document {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
+        private String documentTitle;
         private String documentName;
         private Date uploadedAt;
 

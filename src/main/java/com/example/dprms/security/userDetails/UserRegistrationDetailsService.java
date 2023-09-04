@@ -1,5 +1,6 @@
-package com.example.dprms.security;
+package com.example.dprms.security.userDetails;
 
+import com.example.dprms.security.userDetails.UserRegistrationDetails;
 import com.example.dprms.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserRegistrationDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -55,10 +55,11 @@ public class DocumentController {
 
 
 
-        @PostMapping("/create/concept")
-        public ResponseEntity<?> handleConceptFileUpload(
+        @PostMapping("/upload")
+        public ResponseEntity<?> handleFileUpload(
                 @RequestParam("file") MultipartFile file,
-                @RequestParam("projectId") Long projectId
+                @RequestParam("projectId") Long projectId,
+                @RequestParam("documentTitle") String documentTitle
         ) {
                 try {
                         // Check if the file is empty
@@ -72,7 +73,7 @@ public class DocumentController {
                         }
 
                         // Check if a document with the same project ID and filename already exists
-                        Optional<Document> existingDocument = documentRepository.findByProjectIdAndDocumentName(projectId, file.getOriginalFilename() + " Concept Note");
+                        Optional<Document> existingDocument = documentRepository.findByProjectIdAndDocumentName(projectId, file.getOriginalFilename());
 
                         if (existingDocument.isPresent()) {
                                 return ResponseEntity.badRequest().body("A document with the same project ID and filename already exists.");
@@ -99,75 +100,11 @@ public class DocumentController {
 
                         // Create a new Document entity and populate its fields
                         Document document = new Document();
-                        document.setDocumentName(file.getOriginalFilename() + " Concept Note");
+                        document.setDocumentName(file.getOriginalFilename());
                         document.setProject(projectOptional.get()); // Set the Project entity
+                        document.setDocumentTitle(documentTitle);
 
-                        String fileName = file.getOriginalFilename() + " Concept Note";
-                        // transfer file
-                        try {
-                                file.transferTo(new File("C:\\Users\\HP\\Desktop\\EGA-PROJECT\\development\\backend\\dprmsEGAZ\\src\\main\\java\\com\\example\\dprms\\upload\\" + fileName));
-                        } catch (Exception e) {
-                                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-                        }
-
-                        // Save the document entity to your database
-                        documentRepository.save(document);
-
-                        return ResponseEntity.ok("File uploaded and saved successfully.");
-                } catch (IOException e) {
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload and save the file.");
-                }
-        }
-
-
-        @PostMapping("/create/tor")
-        public ResponseEntity<?> handleTORFileUpload(
-                @RequestParam("file") MultipartFile file,
-                @RequestParam("projectId") Long projectId
-        ) {
-                try {
-                        // Check if the file is empty
-                        if (file.isEmpty()) {
-                                return ResponseEntity.badRequest().body("Please select a file to upload.");
-                        }
-
-                        // Check if the file size exceeds 3MB
-                        if (file.getSize() > 3 * 1024 * 1024) {
-                                return ResponseEntity.badRequest().body("File size exceeds the maximum allowed size (3MB).");
-                        }
-
-                        // Check if a document with the same project ID and filename already exists
-                        Optional<Document> existingDocument = documentRepository.findByProjectIdAndDocumentName(projectId, file.getOriginalFilename() + " Concept Note");
-
-                        if (existingDocument.isPresent()) {
-                                return ResponseEntity.badRequest().body("A document with the same project ID and filename already exists.");
-                        }
-
-                        // Retrieve the Project entity from the database using the projectId
-                        Optional<Project> projectOptional = projectRepository.findById(projectId);
-
-                        // Check if the project exists
-                        if (projectOptional.isEmpty()) {
-                                return ResponseEntity.badRequest().body("Project with ID " + projectId + " does not exist.");
-                        }
-
-                        // Check if the file has an allowed extension (e.g., .pdf or .docx)
-                        String originalFilename = file.getOriginalFilename();
-
-                        if (originalFilename == null) throw new AssertionError();
-
-                        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
-
-                        if (!".pdf".equals(fileExtension) && !".docx".equals(fileExtension)) {
-                                return ResponseEntity.badRequest().body("Only PDF and Word documents are allowed.");
-                        }
-
-                        // Create a new Document entity and populate its fields
-                        Document document = new Document();
-                        document.setDocumentName(file.getOriginalFilename() + " Concept Note");
-                        document.setProject(projectOptional.get()); // Set the Project entity
-
-                        String fileName = file.getOriginalFilename() + " Concept Note";
+                        String fileName = file.getOriginalFilename();
                         // transfer file
                         try {
                                 file.transferTo(new File("C:\\Users\\HP\\Desktop\\EGA-PROJECT\\development\\backend\\dprmsEGAZ\\src\\main\\java\\com\\example\\dprms\\upload\\" + fileName));

@@ -1,4 +1,4 @@
-package com.example.dprms.jwt;
+package com.example.dprms.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
