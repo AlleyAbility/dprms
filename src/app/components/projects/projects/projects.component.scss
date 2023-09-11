@@ -1,0 +1,73 @@
+
+/* project details CSS */
+.example-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .input-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust the gap between input fields as needed */
+    width: calc(50% - 8px); /* Adjust the width to achieve two inputs per row */
+    margin-bottom: 5px; /* Adjust the bottom margin between rows as needed */
+  }
+  
+  .small-input {
+    flex-grow: 1;
+    /* Ensure input fields can shrink to fit smaller screens */
+    width: 100%; /* Make sure input fields take the full width of the row */
+  }
+
+
+// form 2 css
+
+.form-container {
+  max-width: 400px;
+}
+
+.form-card {
+  margin-bottom: 0px;
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+#fileInput {
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+}
+
+.mat-toolbar-single-row {
+  height: auto !important;
+  background: transparent;
+  padding: 0;
+}
+
+.mat-toolbar-single-row button {
+  width: 100px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  display: block;
+}
+
+  
+  @media (max-width: 768px) {
+    /* Adjust styles for smaller screens, such as mobile devices */
+    .input-row {
+      width: 100%; /* Display one input per row on smaller screens */
+    }
+  }
+  

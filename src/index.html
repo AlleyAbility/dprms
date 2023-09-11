@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AngularTest</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="mat-typography">
+  <app-root></app-root>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#myTableId').DataTable({
+        searching: true, // Enable search box
+        paging: true,    // Enable pagination
+        dom: 'Bfrtip', // Add DataTables Buttons
+        buttons: ['csv'] // Enable CSV export button
+        // Add more options and customization here
+      });
+    });
+  </script> 
+<noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+</html>
