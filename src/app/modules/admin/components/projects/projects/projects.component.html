@@ -1,0 +1,159 @@
+<mat-divider></mat-divider>
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out this form</ng-template>
+      <br/>
+
+      <mat-card>
+        <mat-card-content><b>Project Details</b></mat-card-content>
+      </mat-card><br/>
+      
+      <div class="example-container">
+        <div class="input-row">
+            <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Project Name</mat-label>
+                <input matInput placeholder="Project name" formControlName="firstCtrl" required>
+            </mat-form-field>
+        
+            <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Project Sponsor</mat-label>
+                <input matInput placeholder="Project Sponsor" required>
+            </mat-form-field>
+        </div>
+        
+        <div class="input-row">
+            <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Project Vendor</mat-label>
+                <input matInput placeholder="Project Vendor" required>
+            </mat-form-field>
+        
+            <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Project Manager</mat-label>
+                <input matInput placeholder="Mr. Said Seif" required>
+            </mat-form-field>
+        </div>
+
+        <div class="input-row">
+            <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Institution Name</mat-label>
+                <mat-select>
+                  <mat-option value="one">EGAZ</mat-option>
+                  <mat-option value="two">ZRA</mat-option>
+                  <mat-option value="one">PBZ</mat-option>
+                  <mat-option value="two">BPRA</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+        
+            <!-- <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+            </mat-form-field> -->
+        </div>
+      
+        <div class="input-row">
+            <!-- <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </mat-form-field>  -->
+        
+            <!-- <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number"  placeholder="0">
+                <span matTextPrefix>Tsh&nbsp;</span>
+                <span matTextSuffix>.00</span>
+            </mat-form-field> -->
+
+            <mat-form-field class="small-input" appearance="outline">
+                <mat-label>Project Status</mat-label>
+                <mat-select>
+                  <mat-option value="one">New</mat-option>
+                  <mat-option value="two">Development</mat-option>
+                  <mat-option value="one">In use</mat-option>
+                </mat-select>
+              </mat-form-field>
+            
+        </div>
+        
+      </div>
+      
+
+      <div>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Answer the following checklist.">
+    <form [formGroup]="secondFormGroup" class="form-container">
+        <p>
+            <mat-card class="form-card">
+                <mat-card-content>
+                  <b>Checklist About Your Documents</b>
+                </mat-card-content>
+              </mat-card>
+        </p>
+        
+      
+        <div class="form-group">
+          <mat-label>Is budget included in TOR?</mat-label>
+          <mat-chip-listbox aria-label="Budget selection">
+            <mat-chip-option>Yes</mat-chip-option>
+            <mat-chip-option>No</mat-chip-option>
+          </mat-chip-listbox>
+        </div><br/>
+      
+        <div class="form-group">
+          <mat-label>Is Sponsor included in TOR?</mat-label>
+          <mat-chip-listbox aria-label="Sponsor selection">
+            <mat-chip-option>Yes</mat-chip-option>
+            <mat-chip-option>No</mat-chip-option>
+          </mat-chip-listbox>
+        </div><br/>
+      
+        <div class="button-group">
+          <button mat-raised-button matStepperPrevious color="warn">Back</button>&nbsp;&nbsp;
+          <button mat-raised-button matStepperNext color="primary">Next</button>
+        </div>
+      </form>      
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+
+    <!-- <mat-form-field class="small-input" appearance="outline">
+        <mat-label>Upload Concept Note</mat-label>
+        <input matInput type="file" placeholder="Concept Note" required>
+    </mat-form-field> -->
+
+    <!-- <mat-form-field class="small-input" appearance="outline">
+        <div>
+          <mat-toolbar>
+            <input matInput />
+            <button mat-flat-button  color="primary" >
+              Upload
+            </button>
+          </mat-toolbar>
+    
+          <input type="file" id="fileInput" name="fileInput"/>
+        </div>
+    </mat-form-field> -->
+    <!-- <mat-form-field class="small-input">
+      <input type="file" id="fileInput" class="form-control" name="fileInput"/>
+    </mat-form-field> -->
+  
+
+    <p>You are now done.</p>
+    <div>
+      <button mat-raised-button color="warn" matStepperPrevious>Back</button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="stepper.reset()">Confirm</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+

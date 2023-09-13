@@ -1,5 +1,37 @@
-<p>login works!</p>
-<button mat-button color="primary">Primary Button</button>
-<button mat-raised-button color="primary" (click)="login()">Material Button</button>
-<!-- <mat-icon>favorite</mat-icon> -->
-<!-- redirect to <app-sidebar></app-sidebar> -->
+<div class="container vh-100">
+    <div class="row justify-content-center  h-100">
+        <div class="text-center">
+            <img mat-card-image src="../assets/z-logo.png" alt="Logo">
+            <h2>DPRMS</h2>
+            <div class="card my-auto mx-auto mt-4 shadow" style="max-width: 400px;">
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- <fa-icon [icon]="faLock" class="fa-3x"></fa-icon> -->
+                        <h2>Login</h2>
+                    </div>
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+                            <mat-form-field class="small-input" appearance="outline" style="width: 100%;">
+                                <mat-label>Enter your email</mat-label>
+                                <input matInput placeholder="pat@example.com" type="email" id="email" formControlName="email" required>
+                                <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="small-input" appearance="outline" style="width: 100%;">
+                                <mat-label>Enter your password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" type="password" id="password" formControlName="password">
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="password.invalid">{{ getPErrorMessage() }}</mat-error>
+                            </mat-form-field>
+                            <input type="submit" [disabled]="this.loginForm.invalid" mat-raised-button class="btn btn-primary w-100" value="Login" name="">
+                        </form>            
+                    <small><a mat-button class="text-primary" routerLink="../forgot-password">Forgot Password</a></small><br>
+                    Not registered?<small><a mat-button class="text-primary" routerLink="../register">Create Account</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  

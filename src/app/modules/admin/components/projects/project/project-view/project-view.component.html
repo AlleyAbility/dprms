@@ -1,0 +1,203 @@
+<!-- <div>
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <p>Hello, World!</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+        </div>
+    </ng-template>
+    
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+</div> -->
+
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Add User
+   </button> -->
+
+   <div class="container">
+    <br/>
+    <div class="d-flex justify-content-between">
+      <!-- Left content here, if any -->
+      <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add Project
+      </button>
+    </div>
+  
+      <br/>
+  
+     <!-- The Modal -->
+     <div class="modal fade" id="myModal">
+       <div class="modal-dialog">
+         <div class="modal-content">
+     
+           <!-- Modal Header -->
+           <div class="modal-header">
+             <h4 class="modal-title">Add Project</h4>
+             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+           </div>
+     
+           <!-- Modal body -->
+           <div class="modal-body">
+             <form [formGroup]="projectForm">
+
+              <div class="mb-3">
+                  <label for="projectName" class="form-label">Project Name </label>
+                  <input type="text" formControlName="projectName" class="form-control" id="projectName">
+                </div>
+                
+              <div class="mb-3">
+                <label for="projectManager" class="form-label">Project Manager </label>
+                <input type="projectManager" formControlName="projectManager" class="form-control" id="projectManager" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="projectSponsor" class="form-label">Project Sponsor </label>
+                <input type="text" formControlName="projectSponsor" class="form-control" id="projectSponsor">
+            </div>
+            <div class="mb-3">
+              <label for="projectVendor" class="form-label">Project Vendor </label>
+              <input type="text" formControlName="projectVendor" class="form-control" id="projectVendor">
+          </div>
+        
+          <div class="mb-3">
+              <label for="institutionName" class="form-label">Institution Name </label>
+              <select formControlName="institutionName" class="form-control" id="institutionName">
+                  <option>EGAZ</option>
+                  <option>ZRA</option>
+              </select>
+          </div>
+          <div class="mb-3">
+              <label for="status" class="form-label">status </label>
+              <select formControlName="status" class="form-control" id="status">
+                  <option>New</option>
+                  <option>Developing</option>
+                  <option>In use</option>
+              </select>
+          </div>  
+        </form>
+    </div>
+     
+           <!-- Modal footer -->
+           <div class="modal-footer">
+             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+             <button type="submit" (click)="addProject()" [disabled]="this.projectForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Register</button>
+          </div>
+     
+         </div>
+       </div>
+     </div>
+     <mat-card>
+      <div class="table-responsive">
+      <table class="table table-hover table-sm display">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Project Manager</th>
+            <th scope="col">Project Sponsor</th>
+            <th scope="col">Project Vendor</th>
+            <th scope="col">Institution Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projectList; let i = index">
+              <td>{{ i + 1}}</td>
+              <td>{{ project.projectName }}</td>
+              <td>{{ project.projectManager }}</td>
+              <td>{{ project.projectSponsor }}</td>
+              <td>{{ project.projectVendor }}</td>
+              <td>{{ project.institutionName }}</td>
+              <td>{{ project.status }}</td>
+              <td>{{ project.createdAt }}</td>
+              
+            <td>
+              <div class="nav-item dropdown">
+                <button type="button" class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Action
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                  <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" (click)="editProject(project.id, project)"><i class="text-secondary fa fa-pencil" aria-hidden="true"></i> Edit</button></li>
+                  <!-- <li><button type="button" class="dropdown-item" (click)="updateLockStatus(project.id, false)"><i class="text-danger fa fa-trash" aria-hidden="true"></i> Delete</button></li> -->
+                  <!-- <li><button type="button" class="dropdown-item" (click)="updateLockStatus(project.id, true)"><i class="fa fa-check-circle" aria-hidden="true"></i> Activate</button></li> -->
+                </ul>
+              </div>
+            </td>
+    
+          </tr> 
+          
+        </tbody>
+      </table>
+     </div>
+    </mat-card>
+  </div>
+
+
+
+
+ <!-- The Modal -->
+ <div class="modal fade" id="editProject">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Project</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="projectForm">
+            <div class="mb-3">
+                <label for="projectName" class="form-label">Project Name </label>
+                <input type="text" formControlName="projectName" class="form-control" id="projectName">
+              </div>
+              
+            <div class="mb-3">
+              <label for="projectManager" class="form-label">Project Manager </label>
+              <input type="projectManager" formControlName="projectManager" class="form-control" id="projectManager">
+            </div>
+            <div class="mb-3">
+              <label for="projectSponsor" class="form-label">Project Sponsor </label>
+              <input type="text" formControlName="projectSponsor" class="form-control" id="projectSponsor">
+          </div>
+          <div class="mb-3">
+            <label for="projectVendor" class="form-label">Project Vendor </label>
+            <input type="text" formControlName="projectVendor" class="form-control" id="projectVendor">
+        </div>
+      
+        <div class="mb-3">
+            <label for="institutionName" class="form-label">institutionName </label>
+            <select formControlName="institutionName" class="form-control" id="institutionName">
+                <option>EGAZ</option>
+                <option>ZRA</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">status </label>
+            <select formControlName="status" class="form-control" id="status">
+                <option>New</option>
+                <option>Developing</option>
+                <option>In use</option>
+            </select>
+        </div>  
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" [disabled]="this.projectForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+     </div>
+
+    </div>
+  </div>
+</div>

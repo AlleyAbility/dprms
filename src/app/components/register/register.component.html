@@ -1,0 +1,98 @@
+<!-- main app container -->
+
+        <div class="card m-3">
+            <h4 class="card-header"><b>DPRMS USER REGISTRATION</b></h4>
+            <div class="text-center mt-10">
+                <img mat-card-image src="../assets/z-logo.png" alt="Logo">
+            </div>
+            <div class="card-body">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="row">                       
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>First name </mat-label>
+                            <input matInput type="text" placeholder="Said" formControlName="firstName" required>
+                            <!-- <mat-error *ngIf="firstName.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                      
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Last name </mat-label>
+                            <input matInput type="text" placeholder="Juma" formControlName="lastName" required>
+                            <!-- <mat-error *ngIf="lastName.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                        
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Employee ID </mat-label>
+                            <input matInput type="text" placeholder="EMP 445" formControlName="employeeId" required>
+                            <!-- <mat-error *ngIf="employeeId.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                       
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-md-4 col-sm-6  mb-3" appearance="outline">
+                            <mat-label>Phone Number</mat-label>
+                            <input matInput placeholder="Example +255710384666" type="text" id="phone" formControlName="phone" required>
+                            <!-- <mat-error *ngIf="phone.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                       
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Enter your email</mat-label>
+                            <input matInput placeholder="pat@example.com" type="email" id="email" formControlName="email" required>
+                            <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                        
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Your position</mat-label>
+                            <input matInput type="text" placeholder="Project Manager" id="position" formControlName="position" required>
+                            <!-- <mat-error *ngIf="position.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                       
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Institution Name</mat-label>
+                            <mat-select formControlName="institutionName">
+                              <mat-option value="one">EGAZ</mat-option>
+                              <mat-option value="two">ZRA</mat-option>
+                              <mat-option value="one">PBZ</mat-option>
+                              <mat-option value="two">BPRA</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                       
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Division/Unit</mat-label>
+                            <input matInput type="text" placeholder="Network" formControlName="division" required>
+                            <!-- <mat-error *ngIf="division.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                       
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Enter your password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" type="password" id="password" formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                            <!-- <mat-error *ngIf="password.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                       
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Confirm password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" type="password" id="confirmPassword" formControlName="confirmPassword">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                            <!-- <mat-error *ngIf="confirmPassword.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>
+                       
+                    </div>
+                    
+                    <div class="text-center">
+                        <!-- <button [disabled]="this.registerForm.invalid" class="btn btn-primary me-2">Register</button> -->
+                        <button [disabled]="this.registerForm.invalid || loading" class="btn btn-primary me-2">
+                            <span *ngIf="!loading">Register</span>
+                            <span *ngIf="loading">Processing...</span>
+                          </button>
+                        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                    </div>
+                </form>
+                Already registered?<small><a mat-button class="text-primary" routerLink="../login">Login</a></small>
+            </div>
+        </div>

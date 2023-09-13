@@ -1,0 +1,146 @@
+<!-- <div class="d-flex" id="wrapper">
+  <app-sidebar></app-sidebar>
+  <div id="page-content-wrapper">
+    <app-header></app-header>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+    <footer>
+      <app-footer></app-footer>
+    </footer>
+  </div>
+</div> -->
+
+
+<div class="d-flex" id="wrapper">
+
+  <!-- Sidebar -->
+  <div class=" border-right custom-sidebar" style="background-color: #191D88;" id="sidebar-wrapper" [ngClass]="status ? 'hide' : 'show'">
+    <!-- Logo -->
+    <div class="sidebar-logo text-center py-2">
+      <img mat-card-image src="../assets/z-logo-bg.png" alt="Logo" class="logo-img">
+      <h1 class="text-light">DPRMS</h1>
+      <hr class="text-light">
+    </div>
+
+    <!-- Content Area with Background Image -->
+    <div class="bg-image">
+      <div class="list-group-flush">
+        <a routerLink="/admin/home" mat-button class="text-light">
+          <i class="fa fa-dashboard icon"> Dashboard</i> 
+        </a><br/>
+        <a routerLink="/admin/users" mat-button class="text-light">
+          <i class="fa fa-users icon">  Users</i> 
+        </a><br/>
+        <a href="#" mat-button class="text-light">
+          <i class="fa fa-commenting icon">  Notifications</i> 
+        </a><br/>
+        <a href="/admin/projects" mat-button class="text-light">
+          <i class="fa fa-calendar icon">  Projects</i> 
+        </a><br/>
+        <a href="/admin/project-add" mat-button class="text-light">
+          <i class="fa fa-check-circle icon">  Status</i> 
+        </a>
+        
+      </div>
+    </div>    
+  </div>
+
+    <!-- /#sidebar-wrapper -->
+  
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+  
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       
+        <div class="container-fluid">       
+          <button mat-mini-fab (click)="clickEvent()" color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>menu</mat-icon>
+          </button>   
+          <!-- <button class="btn btn-icon" ><i class="fa fa-bars" aria-hidden="true"></i></button> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+              </li> -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Guidelines
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Concept Note</a></li>
+                  <li><a class="dropdown-item" href="#">Terms of Reference</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Progress Report</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+
+            <div class="text-secondary">
+              <!-- <button class="btn btn-icon dropdown-toggle" id="settingDropdown" data-bs-toggle="dropdown"  type="button"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+               -->
+
+              <!-- <div class="nav-item dropdown">
+                <button class="nav-link" type="button" id="naDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="naDropdown">
+                  <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out"> Sign out</i></a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa fa-settings"> Settings</i></a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
+                </ul>
+              </div> -->
+
+          
+              <!-- Default dropstart button -->
+              <div class="btn-group dropstart">
+                <button mat-icon-button data-bs-toggle="dropdown" aria-label="Example icon button with a vertical three dot icon">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <!-- <button type="button" class="btn btn-icon"  aria-expanded="false">
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button> -->
+                <ul class="dropdown-menu text-left">
+                  <!-- Dropdown menu links -->
+                  <li><button mat-button class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"> Sign out</i></button></li>
+                  <li><button mat-button class="dropdown-item" ><i class="fa fa-cogs"> Settings</i></button></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button mat-button class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</button></li>
+                </ul>
+              </div>
+            </div>
+
+            
+            <!-- <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="button">Search</button>
+            </form> -->
+          </div>
+        </div>
+      </nav>
+  
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+      
+      <footer>
+        <app-footer></app-footer>
+      </footer>
+    </div>
+    <!-- /#page-content-wrapper -->
+  
+  </div>
+  
+ 
+  <!-- /#wrapper -->
+
