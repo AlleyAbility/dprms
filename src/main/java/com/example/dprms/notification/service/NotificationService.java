@@ -13,12 +13,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class NotificationService implements INotificationService {
 
-    @Autowired
-    private NotificationRepository notificationRepository;
+    private final NotificationRepository notificationRepository;
 
+//    @Override
+//    public List<Notification> getAllNotifications() {
+//        return notificationRepository.findAll();
+//    }
     @Override
     public List<Notification> getAllNotifications() {
-        return notificationRepository.findAll();
+        return notificationRepository.findAllWithProject();
     }
 
     @Override

@@ -75,6 +75,12 @@ public class UserService implements IUserService {
         return userRepository.findByEmail(email);
     }
 
+
+    @Override
+    public Optional<User> findByEmployeeId(String employeeId) {
+        return userRepository.findByEmployeeId(employeeId);
+    }
+
     @Override
     public void saveUserVerificationToken(User theUser, String token) {
         var verificationToken = new VerificationToken(token, theUser);
@@ -109,6 +115,19 @@ public class UserService implements IUserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+    }
+
+    @Override
+    public User getUserByEmployeeId(String employeeId) {
+        return userRepository.findByEmployeeId(employeeId)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+    }
+
 
     @Override
     public User update(User user) {
@@ -178,4 +197,39 @@ public class UserService implements IUserService {
         }
     }
 
+    @Override
+    public List<UserRecord> getUnlockedUsers() {
+        return userRepository.findByNotLocked(true)
+                .stream()
+                .map(user -> new UserRecord(
+                        user.getId(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getEmail(),
+                        user.getPosition(),
+                        user.getEmployeeId(),
+                        user.getPhone(),
+                        user.getInstitutionName(),
+                        user.getDivision(),
+                        new HashSet<>(user.getRoles()),
+                        new HashSet<>(user.getProjects()))).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public User lockUser(Long id, boolean lock) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setNotLocked(lock); // Update the 'notLocked' field based on the 'lock' parameter
+            userRepository.save(user);
+            return user;
+        }
+        return null; // Return null if the user with the given ID is not found
+    }
+
+
+    public List<String> getUserRoles(Long userId) {
+        return userRepository.getUserRolesByUserId(userId);
+    }
 }

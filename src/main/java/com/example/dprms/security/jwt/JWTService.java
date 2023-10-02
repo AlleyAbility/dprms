@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
 
 @Service
 @AllArgsConstructor
@@ -24,7 +24,7 @@ import java.util.function.Function;
 public class JWTService {
 
     @Value("${spring.jwt.secret}")
-    private  String JWT_SECRET;
+    private String JWT_SECRET;
 
     @Value("${spring.jwt.jwtExpirationInMs}")
     private int JWT_EXPIRATION_TIME_IN_MILLISECONDS;
@@ -68,6 +68,7 @@ public class JWTService {
                 .getBody();
 
     }
+
     private boolean isTokenExpired(String theToken) {
         return extractExpirationTimeFromToken(theToken).before(new Date());
     }

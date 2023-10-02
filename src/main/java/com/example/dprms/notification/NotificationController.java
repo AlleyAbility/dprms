@@ -10,26 +10,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.FOUND;
+import static org.springframework.http.HttpStatus.*;
 
+//@CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/notifications")
+@RequestMapping("/api/v1/notifications")
 public class NotificationController {
 
     @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private INotificationService notificationService;
+
+    private final INotificationService notificationService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Notification>> getAllNotifications(){
-        return new ResponseEntity<>(notificationService.getAllNotifications(), FOUND);
+    public ResponseEntity<List<Notification>> getAllNotifications() {
+        List<Notification> notifications = notificationService.getAllNotifications();
+        return new ResponseEntity<>(notifications, HttpStatus.OK);
     }
+    
     @PostMapping("/create")
     public ResponseEntity<Notification> createNotification(@RequestBody Notification notification){
-        return new ResponseEntity<>(notificationService.createNotification(notification), CREATED);
+        return new ResponseEntity<>(notificationService.createNotification(notification), OK);
     }
 
     @GetMapping("/{id}")

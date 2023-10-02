@@ -1,6 +1,9 @@
 package com.example.dprms.security.userDetails;
 
 import com.example.dprms.security.jwt.JWTAuthenticationFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,13 +19,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 import javax.sql.DataSource;
 
 
 @Configuration
 @EnableWebSecurity
-public class UserRegistrationSecurityConfig {
+@EnableWebMvc
+public class UserRegistrationSecurityConfig implements WebMvcConfigurer {
 
     @Autowired
     private DataSource dataSource;
@@ -37,14 +49,15 @@ public class UserRegistrationSecurityConfig {
             "/dprms/**"};
 
     private static final String[] UN_SECURED_URLs = {
-            "/projects/**",
-            "/projects/{id}",
-            "/users/**",
+            "/api/v1/projects/**",
+            "/api/v1/users/**",
             "/login",
+            "/users/verifyEmail/**",
             "/register/**",
-            "/roles/**",
-            "/documents/**",
-            "/notifications/**"
+            "/api/v1/roles/**",
+            "/api/v1/documents/**",
+            "upload/**",
+            "/api/v1/notifications/**",
     };
 
     @Bean
@@ -60,7 +73,7 @@ public class UserRegistrationSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
             http.csrf().disable()
-                    .authorizeHttpRequests()
+                     .authorizeHttpRequests()
                     .requestMatchers(UN_SECURED_URLs).permitAll()
                     .requestMatchers(SECURED_URLs).hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
                     .and()
@@ -76,6 +89,11 @@ public class UserRegistrationSecurityConfig {
                     .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login?logout")
+                    .permitAll()
                     .and()
                     .authenticationProvider(authenticationProvider())
                     .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -97,4 +115,38 @@ public class UserRegistrationSecurityConfig {
         public ModelMapper modelMapper() {
             return new ModelMapper();
         }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // Adjust the mapping pattern to match your API endpoints
+                .allowedOrigins("http://localhost:4200") // Whitelist the origin of your Angular app
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific HTTP methods
+                .allowedHeaders("*")
+                .allowCredentials(true) // Allow sending cookies
+                .maxAge(3600); // Cache the CORS configuration for 1 hour (optional)
     }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/upload/**")  // URL pattern to access files
+                .addResourceLocations("file:upload/");  // Actual file system path to the directory
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Configure a custom date format
+        objectMapper.setDateFormat(new StdDateFormat());
+
+        // You can also configure other serialization/deserialization features if needed
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+
+        return objectMapper;
+    }
+
+
+}

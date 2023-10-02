@@ -92,7 +92,7 @@ public class ProjectService implements IProjectService {
             throw new UserAlreadyExistsException(
                     user.get().getFirstName()+ " is already assigned to the " + project.get().getProjectName() +" project");
         }
-        project.ifPresent(theProject -> theProject.assignUserToRole(user.get()));
+        project.ifPresent(theProject -> theProject.assignUserToProject(user.get()));
         projectRepository.save(project.get());
         return user.get();
     }

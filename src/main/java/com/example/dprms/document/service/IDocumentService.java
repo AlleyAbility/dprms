@@ -8,10 +8,13 @@ import java.util.Optional;
 
 public interface IDocumentService {
     List<Document> getDocuments();
-    Optional<Document> findByProjectId(Long projectId);
+    List<Document> findByProjectId(Long projectId);
     Optional<Document> findByProjectIdAndDocumentName(Long projectId, String s);
     boolean delete(Long id);
     Document updateDocument(Long id, Document updatedDocument);
     Document createDocument(Document document);
+
+    Optional<Document> findByProjectIdAndDocumentTitle(Long projectId, String documentTitle);
+
 
 }

@@ -33,19 +33,10 @@ public class Project {
         createdAt = new Date(); // Set default timestamp value
     }
 
-//    public String getFormattedCreatedAt() {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        return formatter.format(createdAt);
-//    }
-
 
     @JsonIgnore
     @ManyToMany(mappedBy = "projects") // Update 'mappedBy' to match the property name in User
     private Collection<User> users = new HashSet<>();
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "institution_id")
-//    private Institution institution;
 
 
     public Project(String projectName) {
@@ -61,7 +52,7 @@ public class Project {
         user.getProjects().remove(this);
         this.getUsers().remove(user);
     }
-    public void assignUserToRole(User user){
+    public void assignUserToProject(User user){
         user.getProjects().add(this);
         this.getUsers().add(user);
     }

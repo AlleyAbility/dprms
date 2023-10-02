@@ -23,11 +23,9 @@ public class DocumentService implements IDocumentService {
         return documentRepository.findAll(); // Assuming you have a repository for Document
     }
 
-
     @Override
-    public Optional<Document> findByProjectId(Long projectId) {
-        return Optional.ofNullable(documentRepository.findByProjectId(projectId)
-                .orElseThrow(() -> new EntityNotFoundException("Document not found with project ID: " + projectId)));
+    public List<Document> findByProjectId(Long projectId) {
+        return documentRepository.findByProjectId(projectId);
     }
 
     @Override
@@ -46,7 +44,6 @@ public class DocumentService implements IDocumentService {
         }
     }
 
-
     @Override
     public Document updateDocument(Long id, Document updatedDocument) {
         Optional<Document> existingDocument = documentRepository.findById(id);
@@ -55,7 +52,7 @@ public class DocumentService implements IDocumentService {
             Document documentToUpdate = existingDocument.get();
 
             // Update the fields you want to change
-            if (updatedDocument.getDocumentName()!= null) {
+            if (updatedDocument.getDocumentName() != null) {
                 documentToUpdate.setDocumentName(updatedDocument.getDocumentName());
             }
 
@@ -67,11 +64,14 @@ public class DocumentService implements IDocumentService {
         }
     }
 
-
-
     // Create a new document
     public Document createDocument(Document document) {
         return documentRepository.save(document);
+    }
+
+    @Override
+    public  Optional<Document> findByProjectIdAndDocumentTitle(Long projectId, String documentTitle) {
+        return documentRepository.findByProjectIdAndDocumentTitle(projectId, documentTitle);
     }
 
     // Retrieve a document by ID
@@ -79,5 +79,5 @@ public class DocumentService implements IDocumentService {
         return documentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Document not found with ID: " + id));
     }
-
 }
+

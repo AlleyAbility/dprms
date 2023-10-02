@@ -18,8 +18,10 @@ public class Document {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
+        @Column(name = "document_title")
         private String documentTitle;
         private String documentName;
+        private String filePath; // Add a field for the file path
         private Date uploadedAt;
 
         @PrePersist

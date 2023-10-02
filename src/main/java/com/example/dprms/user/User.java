@@ -14,8 +14,6 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -27,6 +25,7 @@ public class User {
     private String email;
     private String phone;
     private String position;
+    @NaturalId(mutable = true)
     private String employeeId;
     private String institutionName;
     private String division;
