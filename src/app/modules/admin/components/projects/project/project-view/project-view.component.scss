@@ -1,0 +1,144 @@
+/* table from boootsnipp  */
+
+.custab {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+}
+
+.custab:hover {
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+}
+
+.first-tabel {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: gray;
+}
+
+#first-table {
+    border: 3px;
+    border-radius: 4px;
+    background-color: grey;
+}
+
+.dropdown-header {
+    font-weight: 700;
+}
+
+#action-link {
+    text-decoration: none;
+}
+
+
+
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .mb-3{
+    text-align: center;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  /* Style the submit button */
+//   .btn-primary {
+//     background-color: #007bff;
+//     color: #fff;
+//     border: none;
+//     border-radius: 4px;
+//     padding: 10px 20px;
+//     cursor: pointer;
+//   }
+  
+//   .btn-primary:hover {
+//     background-color: #0056b3;
+//   }
+  
+  /* Additional styles for form controls as needed */
+  
+  /* Optional: Style the hr divider */
+  hr {
+    border-top: 1px solid #ccc;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+
+  /* Add your modal styles here */
+
+.modal-content {
+//   width: 90%; /* Adjust the width percentage as needed */
+  max-width: none; /* Disable the maximum width constraint */
+  background-color: #fff; /* Background color of the modal content */
+  border-radius: 10px; /* Rounded corners for the modal */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Shadow effect for the modal */
+}
+
+.modal-header {
+  background-color: #0e3a8c; /* Header background color */
+  color: #fff; /* Header text color */
+  border-bottom: none; /* Remove the default border at the bottom of the header */
+  border-radius: 10px 10px 0 0; /* Rounded corners for the top of the header */
+}
+
+.modal-title {
+  font-size: 24px; /* Title font size */
+}
+
+.modal-body {
+//   padding: 20px; /* Padding inside the modal body */
+}
+/* Increase the modal's width */
+.modal-dialog {
+  max-width: 90%; /* Adjust the width percentage as needed */
+}
+
+/* Adjust the width of the table */
+.modal-body table {
+  width: 100%; /* Set the width to 100% to expand to the modal's width */
+  max-width: none; /* Disable the maximum width constraint */
+}
+
+.modal-footer {
+  background-color: #f8f9fa; /* Footer background color */
+  border-top: none; /* Remove the default border at the top of the footer */
+  border-radius: 0 0 10px 10px; /* Rounded corners for the bottom of the footer */
+}
+
+
+.titleReport{
+  text-align: center;
+  text-decoration: wavy;
+}
+
+/* Adjust the width of the table */
+.table {
+  width: 100%; /* Set the width to 100% to expand to the container's width */
+  max-width: none; /* Disable the maximum width constraint */
+}
+
+/* Optionally, you can set specific column widths if needed */
+.table th,
+.table td {
+  width: auto; /* Set column width to auto for equal distribution */
+
+}
+
+

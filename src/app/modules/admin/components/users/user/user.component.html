@@ -87,9 +87,9 @@
            </div>
          </div>
        </div>
-       <mat-card>
+       <!-- <mat-card> -->
         <div class="table-responsive">
-        <table class="table-hover table-sm display">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class=" display">
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -133,7 +133,7 @@
           </tbody>
         </table>
        </div>
-      </mat-card>
+      <!-- </mat-card> -->
     </div>
 
 

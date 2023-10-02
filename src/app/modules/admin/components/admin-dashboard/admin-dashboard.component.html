@@ -29,17 +29,17 @@
         <a routerLink="/admin/home" mat-button class="text-light">
           <i class="fa fa-dashboard icon"> Dashboard</i> 
         </a><br/>
-        <a routerLink="/admin/users" mat-button class="text-light">
+        <a routerLink="/admin/users" mat-button class="text-light" *ngIf="isAdmin()">
           <i class="fa fa-users icon">  Users</i> 
         </a><br/>
-        <a href="#" mat-button class="text-light">
+        <a routerLink="/admin/notifications" mat-button class="text-light">
           <i class="fa fa-commenting icon">  Notifications</i> 
         </a><br/>
-        <a href="/admin/projects" mat-button class="text-light">
+        <a routerLink="/admin/projects" mat-button class="text-light">
           <i class="fa fa-calendar icon">  Projects</i> 
         </a><br/>
-        <a href="/admin/project-add" mat-button class="text-light">
-          <i class="fa fa-check-circle icon">  Status</i> 
+        <a routerLink="/admin/roles" mat-button class="text-light" *ngIf="isAdmin()">
+          <i class="fa fa-check-circle icon">  Roles</i> 
         </a>
         
       </div>
@@ -63,9 +63,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
+              </li> -->
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Settings</a>
               </li> -->
@@ -80,9 +80,9 @@
                   <li><a class="dropdown-item" href="#">Progress Report</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li>
+              </li> -->
             </ul>
 
             <div class="text-secondary">
@@ -112,10 +112,11 @@
                 </button> -->
                 <ul class="dropdown-menu text-left">
                   <!-- Dropdown menu links -->
-                  <li><button mat-button class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"> Sign out</i></button></li>
-                  <li><button mat-button class="dropdown-item" ><i class="fa fa-cogs"> Settings</i></button></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><button mat-button class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</button></li>
+                  <li><button mat-button class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out">Sign out</i></button></li>
+                  <li><button mat-button class="dropdown-item" routerLink="/admin/profile"><i class="fa fa-user"> Profile</i></button></li>
+                  <!-- <li><button mat-button class="dropdown-item" ><i class="fa fa-cogs"> Settings</i></button></li> -->
+                  <!-- <li><hr class="dropdown-divider"></li> -->
+                  <!-- <li><button mat-button class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</button></li> -->
                 </ul>
               </div>
             </div>
@@ -133,8 +134,13 @@
         <router-outlet></router-outlet>
       </div>
       
-      <footer>
-        <app-footer></app-footer>
+      <footer class="main-footer">
+        <div>
+          <strong>Copyright &copy; 2023 <a href="#">DPRMS</a>.</strong> All rights reserved.
+        </div>
+        <div>
+          <b>Version</b> 1.0.0
+        </div>
       </footer>
     </div>
     <!-- /#page-content-wrapper -->

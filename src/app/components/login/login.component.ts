@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +15,8 @@ export class LoginComponent implements OnInit {
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
+
+  // helper = new JwtHelperService();
 
   loginForm!:FormGroup
  
@@ -27,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
   formConfiguration() {
     this.loginForm = new FormGroup({
-      password:new FormControl(''),
+      password:new FormControl('', [Validators.required]),
       email:new FormControl('',[Validators.email]),
     })
   }
@@ -37,8 +40,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value).subscribe({
         next: (response) => {
-          console.log(response);
           this.router.navigate(['/admin/home']);
+
         },
         error: (error) => {
           console.log(error);

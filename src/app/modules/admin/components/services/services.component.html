@@ -1,63 +1,155 @@
-<div class="container pt-5 pb-5">
-    <div class="col-12">
-        <div class="d-flex flex-wrap justify-content-between">
+<div id="spacing-of-cards" class="section-container">
+    <section class="section" id="card-to-float">
+        <div class="">
+            <div class="row d-flex">
+                <div class="col-xl-12 col-xl-12 col-xl-12">
             <div class="card shadow mt-2">
                 <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
+                    <h2 class="card-title" *ngIf="projectData">Project Title: <b>{{ projectData.projectName }}</b>
+                    </h2>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Project Manager: <b>{{ projectData.projectManager }}</b></li>
+                    <li class="list-group-item">Project Sponsor: <b>{{ projectData.projectSponsor }}</b></li>
+                    <li class="list-group-item">Project Vendor: <b>{{ projectData.projectVendor }}</b></li>
+                    <li class="list-group-item">Institution Name: <b>{{ projectData.institutionName }}</b></li>
+                    <li class="list-group-item">Created: <b>{{ projectData.createdAt }}</b></li>
+                    <li class="list-group-item">Status: <b>{{ projectData.status }}</b></li>
+                    </ul>   
+
+                    <div class="text-center">
+                            <div class="mb-1">
+                                <label for="documentType">Select Document Type:</label>&nbsp;
+                                <select id="documentType" [(ngModel)]="selectedDocumentTitle" class="form-control-sm mt-3">
+                                <option value="Concept Note">Concept Note</option>
+                                <option value="TOR">TOR</option>
+                                </select>
+                            </div>
+                          
+                            <button (click)="loadDocuments(selectedDocumentTitle)" mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#myModal">Load Documents</button>
+                        <p>
+                            <!-- <button >View Document</button>&nbsp;&nbsp; -->
+                            <!-- <button mat-raised-button color="accent">View TOR</button> -->
+                        </p>
+                        
+                    </div>               
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: white;">
+        <div class="">
+            <div class="row d-flex">
+                <div class="col-xl-12 col-xl-12 col-xl-12">
+                    <div class="card" id="card-of-comment">
+                        <div class="card-body">
+                            <div class="d-flex flex-start align-items-center">
+                                <!-- <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60" height="60" /> -->
+                                <div>
+                                    <h4 class="fw-bold text-primary mb-1">
+                                        Comment on the Project
+                                    </h4>
+                                    <!-- <p class="text-muted small mb-0">
+                                        Shared publicly - Jan 2020
+                                    </p> -->
+                                </div><br/>
+                               
+                            </div>
+
+                        </div>
+                        
+                        <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                            <form [formGroup]="notificationForm">
+                                <label for="type">Select your comment type:</label>
+                                <select name="selection" formControlName="type" class="form-control form-outline w-100" id="">
+                                    <option value="APPROVE">Approve</option>
+                                    <option value="REJECT">Reject</option>
+        
+                                </select>
+
+                                <br/>
+
+                                <div class="d-flex flex-start">
+                                    
+                                    <!-- <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40" height="40" /> -->
+                                    <div class="form-outline w-100">
+                                        <textarea class="form-control" formControlName="description" id="textAreaExample" rows="9" style="background: #fff;"></textarea>
+                                        <!-- <label class="form-label" for="textAreaExample">Message</label> -->
+                                    </div>
+                                </div>
+                                <input type="hidden" name="institutionName" formControlName="institutionName"  [(ngModel)]="institutionName">
+                                <!-- <input type="hidden" name="projId" formControlName="projId"  [(ngModel)]="projId"> -->
+                                <div class="float-end mt-2 pt-1">
+                                    <button type="button" mat-raised-button color="warn">
+                                    Cancel
+                                    </button> &nbsp;
+                                    <button (click)="addNotification()" [disabled]="this.notificationForm.invalid" type="submit" mat-raised-button color="primary">
+                                    Send Comment
+                                </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card shadow mt-2">
-                <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
+        </div>
+    </section>
+</div>
+
+
+
+
+ <!-- Modal -->
+ <!-- <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <embed src="https://riptutorial.com/Download/angular.pdf" frameborder="0" width="100%" height="400px">
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-            <div class="card shadow mt-2">
-                <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">Content itself is what the user derives value from. Thus, "content" can refer
-                        to the information provided through the medium, the way in which the information was presented,
-                        as well as the added features included in the medium in which that information was delivered.
-                        The medium, however, provides little to no value to the end-user without the information and
-                        experiences that make up the content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
-                </div>
+
+        </div>
+    </div>
+</div> -->
+
+
+<div id="myModal1" class="modal fade" role="dialog" *ngIf="selectedDocumentUrl">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">View Document</h4>
             </div>
-            <div class="card shadow mt-2">
-                <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">Content itself is what the user derives value from. Thus, "content" can refer
-                        to the information provided through the medium, the way in which the information was presented,
-                        as well as the added features included in the medium in which that information was delivered.
-                        The medium, however, provides little to no value to the end-user without the information and
-                        experiences that make up the content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="modal-body">
+                <!-- Use an iframe to display the document content -->
+                <iframe [src]="selectedDocumentUrl" frameborder="0" width="100%" height="400px"></iframe>
             </div>
-            <div class="card shadow mt-2">
-                <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <div class="card shadow mt-2">
-                <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <div class="card shadow mt-2">
-                <div class="card-body">
-                    <h5 class="card-title">Services Component</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+  
+  
+
+
+
+
+
+
+
+
+
+

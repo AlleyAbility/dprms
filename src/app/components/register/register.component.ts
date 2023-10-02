@@ -18,12 +18,12 @@ export class RegisterComponent implements OnInit {
   hide = true;
   loading = false;
 
-  firstName = new FormControl('',[Validators.required]);
-  lastName = new FormControl('',[Validators.required]);
+  firstName = new FormControl({ value: null, disabled: true },[Validators.required]);
+  lastName = new FormControl({ value: null, disabled: true },[Validators.required]);
   email = new FormControl('',[Validators.required,Validators.email]);
-  institutionName = new FormControl('',[Validators.required]);
-  position = new FormControl('',[Validators.required]);
-  division = new FormControl('',[Validators.required]);
+  institutionName = new FormControl({ value: null, disabled: true },[Validators.required]);
+  position = new FormControl({ value: null, disabled: true },[Validators.required]);
+  division = new FormControl({ value: null, disabled: true },[Validators.required]);
   employeeId = new FormControl('',[Validators.required]);
   phone = new FormControl('',[Validators.required, Validators.pattern(/^\+255\d{9}$/)]);
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
@@ -33,12 +33,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
       this.registerForm = new FormGroup({
-        firstName:new FormControl('',[Validators.required]),
-        lastName:new FormControl('',[Validators.required]),
-        email:new FormControl('',[Validators.required,Validators.email]),
-        institutionName:new FormControl('',[Validators.required]),
-        position:new FormControl('',[Validators.required]),
-        division:new FormControl('',[Validators.required]),
+        firstName:new FormControl({ value: null, disabled: true },[Validators.required]),
+        lastName:new FormControl({ value: null, disabled: true },[Validators.required]),
+        email:new FormControl({ value: null, disabled: true },[Validators.required,Validators.email]),
+        institutionName:new FormControl({ value: null, disabled: true },[Validators.required]),
+        position:new FormControl({ value: null, disabled: true },[Validators.required]),
+        division:new FormControl({ value: null, disabled: true },[Validators.required]),
         employeeId:new FormControl('',[Validators.required]),
         phone:new FormControl('',[Validators.required, Validators.pattern(/^\+255\d{9}$/)]),
         password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -47,7 +47,45 @@ export class RegisterComponent implements OnInit {
       }, {
           validators: MustMatch('password', 'confirmPassword')
       });
+
+      // this.initForm();
   }
+
+   // Function to handle changes in the employeeId input field
+   onEmployeeIdChange(): void {
+    const employeeIdControl = this.registerForm.get('employeeId');
+
+    // Guard clause to check for null
+    if (!employeeIdControl) {
+      return; // Exit early if it's null
+    }
+    const employeeId = employeeIdControl.value;
+
+    // Check if the employeeId is not empty
+    if (employeeIdControl) {
+      // Fetch user data based on the entered employeeId
+      this.userService.getUserByEmployeeId(employeeId).subscribe({
+        next:(userData: any) => {
+          // Populate the form fields with fetched data
+          this.registerForm.patchValue({
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            institutionName: userData.workLocation,
+            position:userData.position,
+            division:userData.department,
+            email:userData.email
+         });
+       },
+       error:(error) => {
+         console.error('Error fetching user data:', error);
+       }
+      }
+        
+      );
+    }
+  }
+
+
 
   onSubmit() {
     this.submitted = true;
@@ -91,6 +129,7 @@ export class RegisterComponent implements OnInit {
       this.submitted = false;
       this.registerForm.reset();
   }
+
 
   
 }

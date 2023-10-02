@@ -3,37 +3,34 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { response } from 'express';
 import Swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+// import DataTable from 'datatables.net-dt';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, AfterViewInit {
+export class UserComponent implements OnInit {
   userForm!:FormGroup
   userList:any[] = [];
   dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
 
 
-  constructor(
-    private userService:UserService,
-    private el: ElementRef
-  ){  }
+  constructor(private userService:UserService){  }
 
  
   ngOnInit(): void {
     this.formConfiguration()
     this.getUser()
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      processing: true
+      pagingType: 'simple_numbers',
+      pageLength: 7,
+      processing: true, 
+      responsive: true
     };
-  }
-
-  ngAfterViewInit(): void {
-    // Initialize the DataTable
-    $(this.el.nativeElement.querySelector('table')).DataTable();
   }
 
 
@@ -53,9 +50,9 @@ formConfiguration(){
 }
 
 
-tinyAlert() {
-  Swal.fire('Hey there!');
-}
+// tinyAlert() {
+//   Swal.fire('Hey there!');
+// }
 successNotification() {
   Swal.fire('Success', 'Data updated successfully!', 'success');
 }
@@ -101,7 +98,8 @@ getUser(){
   this.userService.get().subscribe({
     next:(response)=>{
       this.userList = response
-      console.log(response)
+      this.dtTrigger.next(null);
+      // console.log(response)
     },
     error:(error)=>{
       console.log(error)

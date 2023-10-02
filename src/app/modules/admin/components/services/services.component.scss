@@ -1,0 +1,61 @@
+/* comment bootsnip */
+
+
+/*
+card with comments 
+ */
+
+ .card-header {
+    padding: 9px 16px;
+}
+
+#spacing-of-cards {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#card-to-float {
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.card-body {
+    float: right;
+    right: 0;
+}
+
+#card-of-comment {
+    float: right;
+    right: 0;
+}
+
+.card {
+    width: 100%;
+    /* Set card width to 100% */
+}
+
+.section-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section {
+    width: 90%;
+    /* Set the width of each section (adjust as needed) */
+    margin-right: 5px;
+    /* Add some spacing between sections */
+}
+
+.card-text {
+    font-weight: 500;
+    color: hsl(249, 74%, 67%);
+}
+
+h5 {
+    font-weight: 500;
+}

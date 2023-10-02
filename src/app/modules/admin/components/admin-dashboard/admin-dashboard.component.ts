@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import Swal from 'sweetalert2';
+import { UserService } from '../users/user.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +18,13 @@ export class AdminDashboardComponent implements OnInit {
   clickEvent(){
       this.status = !this.status;       
   }
+
+  isAdmin(): boolean {
+    // Check if the user has the 'ROLE_ADMIN' role
+    const userRoles = this.auth.getUserRoles(); // Replace with your actual method to get user roles
+    return userRoles.includes('ROLE_ADMIN');
+  }
+  
 
   logout(): void {
       Swal.fire({
@@ -29,6 +37,7 @@ export class AdminDashboardComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.auth.logout();
+
           // Swal.fire('Removed!', 'Data removed successfully.', 'success');
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire('Cancelled', 'Process Failed!', 'error');

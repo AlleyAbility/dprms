@@ -3,8 +3,8 @@
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button> -->
 <mat-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <mat-step [stepControl]="projectForm">
+    <form [formGroup]="projectForm">
       <ng-template matStepLabel>Fill out this form</ng-template>
       <br/>
 
@@ -16,44 +16,49 @@
         <div class="input-row">
             <mat-form-field class="small-input" appearance="outline">
                 <mat-label>Project Name</mat-label>
-                <input matInput placeholder="Project name" formControlName="firstCtrl" required>
+                <input matInput placeholder="Project name" name="projectName" id="projectName" formControlName="projectName" required>
             </mat-form-field>
         
             <mat-form-field class="small-input" appearance="outline">
                 <mat-label>Project Sponsor</mat-label>
-                <input matInput placeholder="Project Sponsor" required>
+                <input matInput placeholder="Project Sponsor" name="projectSponsor" id="projectSponsor" formControlName="projectSponsor" required>
             </mat-form-field>
         </div>
         
         <div class="input-row">
             <mat-form-field class="small-input" appearance="outline">
                 <mat-label>Project Vendor</mat-label>
-                <input matInput placeholder="Project Vendor" required>
+                <input matInput placeholder="Project Vendor" name="projectVendor" formControlName="projectVendor" required>
             </mat-form-field>
         
             <mat-form-field class="small-input" appearance="outline">
                 <mat-label>Project Manager</mat-label>
-                <input matInput placeholder="Mr. Said Seif" required>
+                <input matInput placeholder="Mr. Said Seif" id="projectManager" formControlName="projectManager" required>
             </mat-form-field>
         </div>
 
         <div class="input-row">
             <mat-form-field class="small-input" appearance="outline">
                 <mat-label>Institution Name</mat-label>
-                <mat-select>
-                  <mat-option value="one">EGAZ</mat-option>
-                  <mat-option value="two">ZRA</mat-option>
-                  <mat-option value="one">PBZ</mat-option>
-                  <mat-option value="two">BPRA</mat-option>
+                <mat-select formControlName="institutionName">
+                  <mat-option value="EGAZ">EGAZ</mat-option>
+                  <mat-option value="ZRA">ZRA</mat-option>
+                  <mat-option value="PBZ">PBZ</mat-option>
+                  <mat-option value="BPRA">BPRA</mat-option>
+                  <mat-option value="ZSSF">ZSSF</mat-option>
+                  <mat-option value="ZURA">ZURA</mat-option>
+                  <mat-option value="ZSTC">ZSTC</mat-option>
+                  <mat-option value="ZIPA">ZIPA</mat-option>
+                  <mat-option value="ZMA">ZMA</mat-option>
+                  <mat-option value="ZPC">ZPC</mat-option>
+                  <mat-option value="MTID">MTID</mat-option>
+                  <mat-option value="MICT">MICT</mat-option>
+                  <mat-option value="MEVT">MEVT</mat-option>
+                  <mat-option value="MLHSD">MLHSD</mat-option>
+                  <mat-option value="MIYCS">MIYCS</mat-option>
                 </mat-select>
               </mat-form-field>
-              
-        
-            <!-- <mat-form-field class="small-input" appearance="outline">
-                <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
-            </mat-form-field> -->
+
         </div>
       
         <div class="input-row">
@@ -74,85 +79,226 @@
 
             <mat-form-field class="small-input" appearance="outline">
                 <mat-label>Project Status</mat-label>
-                <mat-select>
-                  <mat-option value="one">New</mat-option>
-                  <mat-option value="two">Development</mat-option>
-                  <mat-option value="one">In use</mat-option>
+                <mat-select formControlName="status" >
+                  <mat-option value="new">New</mat-option>
+                  <mat-option value="development">Developing</mat-option>
+                  <mat-option value="in use">In use</mat-option>
+                  <mat-option value="in use">Not Working</mat-option>
                 </mat-select>
               </mat-form-field>
             
         </div>
         
       </div>
-      
-
-      <div>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
+        <button mat-raised-button color="primary" [disabled]="isProjectAdded" (click)="submitForm()">Submit</button>&nbsp;&nbsp;
+        <button mat-raised-button color="accent" [disabled]="!isProjectAdded" matStepperNext>Next</button>
     </form>
+    <!-- <button [disabled]="loading" mat-stroked-button color="accent" matStepperNext>Next
+      <span *ngIf="!loading">Register</span>
+      <span *ngIf="loading">Processing...</span>
+    </button> -->
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="Answer the following checklist.">
-    <form [formGroup]="secondFormGroup" class="form-container">
+  <mat-step [stepControl]="checkListForm" label="Answer the following checklist.">
+    <form [formGroup]="checkListForm">
         <p>
-            <mat-card class="form-card">
-                <mat-card-content>
-                  <b>Checklist About Your Documents</b>
-                </mat-card-content>
-              </mat-card>
+          <mat-card class="form-card">
+              <mat-card-content>
+                <b>Checklist About Your Documents</b>
+              </mat-card-content>
+          </mat-card>
         </p>
+        <div class="example-container form-card">
+          <div class="part">
+
+            <div class="input-row">
+              <div class="form-group">
+                <mat-label><i>Is the project documents containing the summary budget?</i></mat-label>
+                <mat-chip-listbox aria-label="Budget selection" formControlName="budgetIncluded">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div><br/>
+            
+              <div class="form-group">
+                <mat-label><i>Is the project support and sponsorship mentioned in a project document?</i></mat-label>
+                <mat-chip-listbox aria-label="Sponsor selection" formControlName="sponsorIncluded">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div>
+            </div>
+          
+            <div class="input-row">
+              <div class="form-group">
+                <mat-label><i>Are the Project documents outline all aspects of a project including all related activities?</i></mat-label>
+                <mat-chip-listbox aria-label="Activities" formControlName="activities">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div><br/>
+
+              <div class="form-group">
+                <mat-label><i>Does the project contain the contact person (i.e. name, tittle/role, email and phone number)</i></mat-label>
+                <mat-chip-listbox aria-label="Contact" formControlName="contact">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="form-group">
+                <mat-label><i>Are the project documents containing the institution vision, mission, and objectives/Goals?</i></mat-label>
+                <mat-chip-listbox aria-label="Vision" formControlName="vision">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div><br/>
+            
+              <div class="form-group">
+                <mat-label><i>Are the project documents approved by the Accounting Officer/Head of the Institution?</i></mat-label>
+                <mat-chip-listbox aria-label="Approved" formControlName="approved">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div>
+            </div>
+          </div>
+     
+
+          <!-- SECOND -->
+
+          <div class="part">
+          
+            <div class="input-row">
+              <div class="form-group">
+                <mat-label><i>Is the project documents contain a project plan or Gantt chart that provide appropriate milestones?</i></mat-label>
+                <mat-chip-listbox aria-label="Gantt Included" formControlName="gantt">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div><br/>
+            
+              <div class="form-group">
+                <mat-label><i>Does this Project comply with Government Policies, Standards, Guidelines, Procedures and circulars etc.?</i></mat-label>
+                <mat-chip-listbox aria-label="Policies Included" formControlName="policies">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div>
+            </div>
+
         
-      
-        <div class="form-group">
-          <mat-label>Is budget included in TOR?</mat-label>
-          <mat-chip-listbox aria-label="Budget selection">
-            <mat-chip-option>Yes</mat-chip-option>
-            <mat-chip-option>No</mat-chip-option>
-          </mat-chip-listbox>
-        </div><br/>
-      
-        <div class="form-group">
-          <mat-label>Is Sponsor included in TOR?</mat-label>
-          <mat-chip-listbox aria-label="Sponsor selection">
-            <mat-chip-option>Yes</mat-chip-option>
-            <mat-chip-option>No</mat-chip-option>
-          </mat-chip-listbox>
-        </div><br/>
+          
+            <div class="input-row">
+              <div class="form-group">
+                <mat-label><i>Does the project contain the minimum qualification and experience?</i></mat-label>
+                <mat-chip-listbox aria-label="Qualifications" formControlName="qualifications">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div><br/>
+            
+              <div class="form-group">
+                <mat-label><i>Does the Project tell anything about what kind of software environment will be used?</i></mat-label>
+                <mat-chip-listbox aria-label="Software" formControlName="software">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="form-group">
+                <mat-label><i>Are Major Deliverables and Outcomes clearly mentioned?</i></mat-label>
+                <mat-chip-listbox aria-label="Outcomes selection" formControlName="outcomes">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div><br/>
+            
+              <div class="form-group">
+                <mat-label><i>Are the roles and responsibilities mentioned?</i></mat-label>
+                <mat-chip-listbox aria-label="Roles Included" formControlName="role">
+                  <mat-chip-option value="Yes">Yes</mat-chip-option>
+                  <mat-chip-option color="warn" value="No">No</mat-chip-option>
+                </mat-chip-listbox>
+              </div>
+            </div>
+          </div>
+        </div>
       
         <div class="button-group">
           <button mat-raised-button matStepperPrevious color="warn">Back</button>&nbsp;&nbsp;
-          <button mat-raised-button matStepperNext color="primary">Next</button>
+          <button mat-raised-button color="primary" [disabled]="isDocumentUploaded" (click)="onClick()">Submit</button>&nbsp;&nbsp;
+          <button mat-raised-button matStepperNext [disabled]="!isDocumentUploaded" color="warn">Next</button>
         </div>
+      
       </form>      
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
+    <br/>
 
-    <!-- <mat-form-field class="small-input" appearance="outline">
+    <div>
+
+      <mat-toolbar *ngIf="currentFile1" class="progress-bar">
+        <mat-progress-bar color="accent" [value]="progress1"></mat-progress-bar>
+        <span class="progress">{{ progress1 }}%</span>
+      </mat-toolbar>
+      <br/>
+    
+      <mat-form-field appearance="outline">
         <mat-label>Upload Concept Note</mat-label>
-        <input matInput type="file" placeholder="Concept Note" required>
-    </mat-form-field> -->
-
-    <!-- <mat-form-field class="small-input" appearance="outline">
         <div>
           <mat-toolbar>
-            <input matInput />
-            <button mat-flat-button  color="primary" >
+            <input matInput [value]="fileName1" />
+    
+            <button mat-flat-button color="primary" [disabled]="!currentFile1" (click)="upload1()">
               Upload
             </button>
           </mat-toolbar>
     
-          <input type="file" id="fileInput" name="fileInput"/>
+          <input type="file" id="fileInput1" (change)="selectFile1($event)" name="fileInput1"/>
         </div>
-    </mat-form-field> -->
-    <!-- <mat-form-field class="small-input">
-      <input type="file" id="fileInput" class="form-control" name="fileInput"/>
-    </mat-form-field> -->
-  
+      </mat-form-field>
+    </div>
 
+
+    
+    <div>
+      <mat-toolbar *ngIf="currentFile2" class="progress-bar">
+       
+        <mat-progress-bar color="accent" [value]="progress2"></mat-progress-bar>
+        <span class="progress">{{ progress2 }}%</span>
+      </mat-toolbar><br/>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Upload Term of Reference</mat-label>
+        <div>
+          <mat-toolbar>
+            <input matInput [value]="fileName2" />
+    
+            <button mat-flat-button color="primary" [disabled]="!currentFile2" (click)="upload2()">
+              Upload
+            </button>
+          </mat-toolbar>
+    
+          <input type="file" id="fileInput2" (change)="selectFile2($event)" name="fileInput2"/>
+        </div>
+      </mat-form-field>
+    </div>
+    
+    <!-- <div *ngIf="message" class="message">
+      {{ message }}
+    </div> -->
+
+  
+    <br/>
     <p>You are now done.</p>
     <div>
       <button mat-raised-button color="warn" matStepperPrevious>Back</button>&nbsp;&nbsp;
-      <button mat-raised-button color="primary" (click)="stepper.reset()">Confirm</button>
+      <button mat-raised-button color="primary" (click)="onConfirm()">Confirm</button>
     </div>
   </mat-step>
 </mat-stepper>

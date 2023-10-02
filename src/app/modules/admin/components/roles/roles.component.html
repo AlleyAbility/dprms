@@ -1,0 +1,156 @@
+<div>
+    <div class="d-flex justify-content-between">
+        <!-- Left content here, if any -->
+        <button mat-mini-fab color="primary" data-bs-toggle="modal" data-bs-target="#addModal">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <br />
+
+    <div class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover table-sm display">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of roleList; let i = index">
+                    <td>{{ i + 1}}</td>
+                    <td>{{ role.name }}</td>
+                    <td>
+                        <div class="nav-item dropdown">
+                            <button type="button" class="nav-link dropdown-toggle" id="navbarDropdown2" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li>
+                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#assignModal" (click)="openAssignModal(role.id)"> Assign User</button>
+
+                                </li>
+                                <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                    data-bs-target="#removeModal" (click)="openRemoveModal(role.id)">Remove User</button></li>
+
+                                <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                    data-bs-target="#removeModal">Delete Role</button></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+
+    <div class="container">
+
+        <!-- The Modal -->
+        <div class="modal fade" id="addModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Role</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form [formGroup]="roleForm">
+
+                            <div class="mb-3">
+                                <label for="addRole" class="form-label">Enter Role Name </label>
+                                <input type="text" formControlName="name" class="form-control" id="role"
+                                    placeholder="ROLE_USER">
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="addRole()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <span>
+        <!-- Assign Modal -->
+        <div class="modal fade" id="assignModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Assign Role</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form [formGroup]="assignForm">
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Assign To</label>
+                                <input type="email" formControlName="email" class="form-control" id="email"
+                                    placeholder="Enter your Email">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="assign()">Assign</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </span>
+
+    <span>
+        <!-- Remove Modal -->
+        <div class="modal fade" id="removeModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Assign Role</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form [formGroup]="removeForm">
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Remove From </label>
+                                <input type="email" formControlName="email" class="form-control" id="email"
+                                    placeholder="Enter your Email">
+                            </div>
+                           
+
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="remove()">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </span>
+</div>

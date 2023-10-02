@@ -55,7 +55,23 @@ body {
     margin-left: 0;
   }
 
-  /* Add this CSS to your project's styles.css or a custom stylesheet */
+  /* Add this CSS to your existing CSS file or component CSS */
+#page-content-wrapper {
+  flex: 1; /* Allow content area to grow and take available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
   
   @media (min-width: 768px) {

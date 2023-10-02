@@ -1,0 +1,160 @@
+<div class="container bootdey">
+    <div class="email-app mb-4">
+        <!-- <nav>
+            <a href="page-inbox-compose.html" class="btn btn-danger btn-block">New Email</a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-inbox"></i> Approved <span class="badge badge-danger">4</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-star"></i> Rejected</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-rocket"></i> All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-trash-o"></i> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-bookmark"></i> Not completed <span class="badge badge-danger">4</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-inbox"></i> Inbox </a>
+                </li>
+            </ul>
+        </nav> -->
+        <main class="inbox">
+            <div class="toolbar">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-check">Approved</span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-star"> Rejected</span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-star-o"> Not completed</span>
+                    </button>
+                    <!-- <button type="button" class="btn btn-light">
+                        <span class="fa fa-bookmark-o">Not completed</span>
+                    </button> -->
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-rocket">All</span>
+                    </button>
+                </div>
+                
+                <!-- <div class="btn-group">
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-mail-reply"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-mail-reply-all"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-mail-forward"></span>
+                    </button>
+                </div> -->
+               
+                <!-- <div class="btn-group">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                        <span class="fa fa-tags"></span>
+                        <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">add label <span class="badge badge-danger"> Home</span></a>
+                        <a class="dropdown-item" href="#">add label <span class="badge badge-info"> Job</span></a>
+                        <a class="dropdown-item" href="#">add label <span class="badge badge-success"> Clients</span></a>
+                        <a class="dropdown-item" href="#">add label <span class="badge badge-warning"> News</span></a>
+                    </div>
+                </div> -->
+                <!-- <div class="btn-group float-right">
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-chevron-left"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-chevron-right"></span>
+                    </button>
+                </div> -->
+            </div>
+    
+            <ul class="messages">
+                <li [ngClass]="{'message': true, 'unread': note.status === 'unread'}" *ngFor="let note of notificationList; let i = index">
+                    <a href="#">
+                        <div class="actions">
+                            <span class="action"><i class="fa fa-square-o"></i></span>
+                            <!-- <span class="action"><i class="fa fa-star-o"></i></span> -->
+                        </div>
+                        <div class="header">
+                            <span class="from">{{ note.project.projectName }}</span>
+                            <span class="date">
+                            <span class="fa fa-paper-clip"></span> {{ formatTimestamp(note.createdAt) }}</span>
+                        </div>
+                        <div class="title">
+                            {{ note.type }}
+                        </div>
+                        <div class="description">
+                           {{ note.description }}
+                        </div>
+                    </a>
+                </li>
+                <!-- <li class="message">
+                    <a href="#">
+                        <div class="actions">
+                            <span class="action"><i class="fa fa-square-o"></i></span>
+                            <span class="action"><i class="fa fa-star-o"></i></span>
+                        </div>
+                        <div class="header">
+                            <span class="from">BPRAMS</span>
+                            <span class="date">
+                            <span class="fa fa-paper-clip"></span> 12-04-2023</span>
+                        </div>
+                        <div class="title">
+                            Rejection Notification
+                        </div>
+                        <div class="description">
+                            The proposed system has been rejected due to the existing of similar system used by ZRA, This institution should work with ZRA to use similar system.
+                        </div>
+                    </a>
+                </li>
+                <li class="message unread">
+                    <a href="#">
+                        <div class="actions">
+                            <span class="action"><i class="fa fa-square-o"></i></span>
+                            <span class="action"><i class="fa fa-star-o"></i></span>
+                        </div>
+                        <div class="header">
+                            <span class="from">DPRMS</span>
+                            <span class="date">
+                            <span class="fa fa-paper-clip"></span> 31-02-2023</span>
+                        </div>
+                        <div class="title">
+                            Approval Notification.
+                        </div>
+                        <div class="description">
+                            The proposed system has been allowed to continue in development process under the needed requirements and government policies.
+                        </div>
+                    </a>
+                </li>
+                <li class="message">
+                    <a href="#">
+                        <div class="actions">
+                            <span class="action"><i class="fa fa-square-o"></i></span>
+                            <span class="action"><i class="fa fa-star-o"></i></span>
+                        </div>
+                        <div class="header">
+                            <span class="from">BPRAMS</span>
+                            <span class="date">
+                            <span class="fa fa-paper-clip"></span> 12-04-2023</span>
+                        </div>
+                        <div class="title">
+                            Rejection Notification
+                        </div>
+                        <div class="description">
+                            The proposed system has been rejected due to the existing of similar system used by ZRA, This institution should work with ZRA to use similar system.
+                        </div>
+                    </a>
+                </li> -->
+            </ul>
+        </main>
+    </div>
+</div>

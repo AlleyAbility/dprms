@@ -7,7 +7,12 @@
             </div>
             <div class="card-body">
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                    <div class="row">                       
+                    <div class="row">   
+                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
+                            <mat-label>Employee ID </mat-label>
+                            <input matInput type="text" placeholder="10001"  (input)="onEmployeeIdChange()" formControlName="employeeId" required>
+                            <!-- <mat-error *ngIf="employeeId.invalid">{{ getErrorMessage() }}</mat-error> -->
+                        </mat-form-field>                    
                         <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
                             <mat-label>First name </mat-label>
                             <input matInput type="text" placeholder="Said" formControlName="firstName" required>
@@ -19,13 +24,7 @@
                             <input matInput type="text" placeholder="Juma" formControlName="lastName" required>
                             <!-- <mat-error *ngIf="lastName.invalid">{{ getErrorMessage() }}</mat-error> -->
                         </mat-form-field>
-                        
-                        <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
-                            <mat-label>Employee ID </mat-label>
-                            <input matInput type="text" placeholder="EMP 445" formControlName="employeeId" required>
-                            <!-- <mat-error *ngIf="employeeId.invalid">{{ getErrorMessage() }}</mat-error> -->
-                        </mat-form-field>
-                       
+       
                     </div>
                     <div class="row">
                         <mat-form-field class="col-md-4 col-sm-6  mb-3" appearance="outline">
@@ -42,7 +41,7 @@
                         
                         <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
                             <mat-label>Your position</mat-label>
-                            <input matInput type="text" placeholder="Project Manager" id="position" formControlName="position" required>
+                            <input matInput type="text" placeholder="Project Manager" id="position"  formControlName="position" required>
                             <!-- <mat-error *ngIf="position.invalid">{{ getErrorMessage() }}</mat-error> -->
                         </mat-form-field>
                        
@@ -50,12 +49,13 @@
                     <div class="row">
                         <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">
                             <mat-label>Institution Name</mat-label>
-                            <mat-select formControlName="institutionName">
+                            <input matInput type="text" placeholder="Institution Name" id="institutionName" formControlName="institutionName" required>
+                            <!-- <mat-select formControlName="institutionName">
                               <mat-option value="one">EGAZ</mat-option>
                               <mat-option value="two">ZRA</mat-option>
                               <mat-option value="one">PBZ</mat-option>
                               <mat-option value="two">BPRA</mat-option>
-                            </mat-select>
+                            </mat-select> -->
                           </mat-form-field>
                        
                         <mat-form-field class="col-md-4 col-sm-6 mb-3" appearance="outline">

@@ -5,6 +5,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
+
+  .part {
+    flex: 1;
+    padding: 1rem;
+  }
   
   .input-row {
     display: flex;
@@ -24,7 +29,7 @@
 // form 2 css
 
 .form-container {
-  max-width: 400px;
+  max-width: 200px;
 }
 
 .form-card {
@@ -35,12 +40,19 @@
   margin-bottom: 0px;
 }
 
+.progress-bar {
+  padding: 0;
+}
+
+.progress {
+  width: 50px;
+}
+
 #fileInput {
   position: absolute;
   cursor: pointer;
   z-index: 10;
   opacity: 0;
-  height: 100%;
   left: 0px;
   top: 0px;
 }
@@ -63,6 +75,14 @@
   display: block;
 }
 
+.message {
+  background-color: #ddd;
+  padding: 15px;
+  color: #333;
+  border: #aaa solid 1px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
   
   @media (max-width: 768px) {
     /* Adjust styles for smaller screens, such as mobile devices */
