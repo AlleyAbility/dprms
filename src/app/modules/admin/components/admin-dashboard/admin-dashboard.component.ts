@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import Swal from 'sweetalert2';
 import { UserService } from '../users/user.service';
+import {
+  faDashboard,
+  faLocation,
+  faShop,
+  faBox,
+  faMoneyBill,
+  faChartBar,
+  faContactBook,
+  faHand,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,6 +19,15 @@ import { UserService } from '../users/user.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
+
+  faDashboard = faDashboard;
+  faLocation = faLocation;
+  faShop = faShop;
+  faBox = faBox;
+  faMoneyBill = faMoneyBill;
+  faChartBar = faChartBar;
+  faContactBook = faContactBook;
+  faHand = faHand;
 
   constructor(private auth: AuthService, private userService: UserService) { }
 

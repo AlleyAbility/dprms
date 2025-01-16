@@ -29,14 +29,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
     RegisterComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+
   ],
   imports: [
     BrowserModule,

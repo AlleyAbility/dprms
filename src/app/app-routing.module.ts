@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { authGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
@@ -14,7 +13,7 @@ const routes: Routes = [
     {path: 'forgot-password', component:ForgotPasswordComponent},
     {
       path: 'admin',
-      canActivate: [authGuard],
+      // canActivate: [authGuard],
       loadChildren: () =>
         import('./modules/admin/admin.module').then((m) => m.AdminModule),
     },

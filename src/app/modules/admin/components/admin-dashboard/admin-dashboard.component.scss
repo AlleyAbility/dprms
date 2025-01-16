@@ -6,11 +6,29 @@ body {
     flex-direction: column;
     overflow-x: hidden;
   }
-  img{
-    height: 8em;
-    width: 12em;
-    margin-left: -200;
+  .sidebar-logo {
+    padding: 0.5rem 1rem; /* Reduce padding */
   }
+
+  
+  
+  .sidebar-logo h1 {
+    font-size: 1.2rem; /* Reduce font size for the text */
+    margin: 0.5rem 0; /* Adjust spacing around the heading */
+  }
+  
+  // img{
+  //   height: 8em;
+  //   width: 8em;
+  //   margin-left: -200;
+  // }
+
+  img.logo-img {
+    height: 4em; /* Adjust height */
+    width: 4em; /* Adjust width */
+    margin-left: 0; /* Remove unnecessary negative margin */
+  }
+  
 
 .bg-image {
   text-decoration: none;
@@ -28,7 +46,7 @@ body {
   #sidebar-wrapper {
     // border: 1px solid #000;
     min-height: 100vh;
-    margin-left: -15rem;
+    margin-left: 0.5rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
@@ -45,7 +63,7 @@ body {
   }
   
   .list-group-flush a{
-    margin-left: 2em;
+    margin-left: 1em;
   }
   #page-content-wrapper {
     min-width: 100vw;
@@ -56,20 +74,36 @@ body {
   }
 
   /* Add this CSS to your existing CSS file or component CSS */
-#page-content-wrapper {
-  flex: 1; /* Allow content area to grow and take available space */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  #page-content-wrapper {
+    flex: 1; /* Take available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content at the top */
+  }
+  .container-fluid {
+    padding: 0.5rem; /* Optional for spacing */
+    flex-grow: 1; /* Ensure it stretches */
+  }
+    
 
 .main-footer {
   background-color: #333;
   color: #fff;
-  padding: 10px 20px;
+  padding: 5px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+
+nav.navbar {
+  height: 50px; /* Adjust the height as needed */
+  padding: 0.5rem 1rem; /* Reduce padding */
+  font-size: 0.9rem; /* Reduce font size for smaller text */
+}
+
+nav.navbar .navbar-toggler {
+  padding: 0.25rem 0.5rem; /* Reduce toggle button size */
 }
 
 

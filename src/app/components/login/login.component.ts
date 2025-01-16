@@ -1,70 +1,33 @@
-import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
-
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  faLock = faLock;
-  hide = true;
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
 
-  // helper = new JwtHelperService();
+  loginForm = this.formBuilder.group({
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required]]
+  })
 
-  loginForm!:FormGroup
- 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
-    this.formConfiguration()
-    if (this.auth.isLoggedIn()) {
-      this.router.navigate(['/admin/home']);
-    }
-  }
-  formConfiguration() {
-    this.loginForm = new FormGroup({
-      password:new FormControl('', [Validators.required]),
-      email:new FormControl('',[Validators.email]),
-    })
-  }
-  errorMessage: string = '';
-
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.auth.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          this.router.navigate(['/admin/home']);
-
-        },
-        error: (error) => {
-          console.log(error);
-          this.errorMessage = 'Incorrect Email/Password.';
-        },
-      });
-    }
   }
 
-  getErrorMessage() {
-    if (this.email.hasError('email')) {
-      return 'Not a valid email';
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
     }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    console.info("Form Valid!")
   }
 
-  getPErrorMessage() {
-    if (this.password.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.password.hasError('password') ? 'Try another' : '';
+  get controls(): { [p: string]: AbstractControl } {
+    return this.loginForm.controls;
   }
 
 }
